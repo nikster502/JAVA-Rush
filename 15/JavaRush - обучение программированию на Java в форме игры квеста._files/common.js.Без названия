@@ -1,0 +1,164 @@
+/*constants*/
+
+var JAVARUSH_USER_PRIVATEKEY = "javarush.user.privateKey";
+var JAVARUSH_USER_SESSIONID = "javarush.user.sessionId";
+var JAVARUSH_USER_VKUSERID= "javarush.user.vk.userId";
+var JAVARUSH_USER_VKTOKEN = "javarush.user.vk.accessToken";
+var JAVARUSH_USER_LOGIN = "javarush.user.login";
+var JAVARUSH_USER_PAYMENT = "javarush.user.payment.";
+
+
+
+
+/*utils*/
+var indexApiCall = 0;
+function API_sendRequestAsync2(strUrl, params, fnCallback) {
+    for (var key in params) {
+        var first = (strUrl.indexOf("?") == -1) ? "?" : "&";
+        strUrl += first + encodeURIComponent(key) + "=" + encodeURIComponent(params[key]);
+    }
+
+    API_sendRequestAsync(strUrl, fnCallback);
+}
+
+function API_sendRequestAsync(strUrl, fnCallback) {
+
+    //create callback function
+    indexApiCall++
+    var rand = Math.floor(Math.random()*1000000);
+    var callbackName = "API_callback_" + rand + "_"+ indexApiCall;
+    window[callbackName] = fnCallback;
+
+    //update url
+    var c = strUrl.indexOf("?") > 0 ? "&" : "?";
+    strUrl += c + "callback=" + callbackName;
+
+    //appent script element
+    var script = document.createElement("script");
+    script.src = strUrl;
+    document.body.appendChild(script);
+}
+
+
+function sendPostRequest(path, params, method) {
+    method = method || "post";
+
+    var form = document.createElement("form");
+    form.setAttribute("method", method);
+    form.setAttribute("action", path);
+
+    for(var key in params) {
+        if(params.hasOwnProperty(key)) {
+            var hiddenField = document.createElement("input");
+            hiddenField.setAttribute("type", "hidden");
+            hiddenField.setAttribute("name", key);
+            hiddenField.setAttribute("value", params[key]);
+
+            form.appendChild(hiddenField);
+        }
+    }
+
+    document.body.appendChild(form);
+    form.submit();
+}
+
+function getURLParameter(name) {
+    return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [, ""])[1].replace(/\+/g, '%20')) || null
+}
+
+function getCookie(name) {
+    var parts = document.cookie.split(name + "=");
+    if (parts.length == 2) return parts.pop().split(";").shift();
+}
+function setCookieUnlimited(name, value)
+{
+    var dt = new Date();
+    dt.setTime(dt.getTime()+365*86400*1000);
+    setCookie(name, value,dt.toGMTString(),"/");
+}
+
+function setCookie(name, value, expires, path, domain, secure) {
+    document.cookie = name + "=" + encodeURIComponent(value) +
+        ((expires) ? "; expires=" + expires : "") +
+        ((path) ? "; path=" + path : "") +
+        ((domain) ? "; domain=" + domain : "") +
+        ((secure) ? "; secure" : "");
+}
+
+function deleteCookie(name)
+{
+    setCookie(name, null, -1);
+}
+
+window.TOPMENU = {
+    data: {
+        isUserLoggedIn: false
+    },
+
+    initialize: function () {
+
+        $("#nav .has-sub").hover(
+            function(e) {
+                $(this).siblings().addClass('hide-sub-menu');
+                $(this).removeClass('hide-sub-menu');
+            },
+            function(e) {
+                $('.hide-sub-menu').removeClass('hide-sub-menu');
+            }
+        );
+
+        TOPMENU.updateViewAsync();
+    },
+
+    updateView: function () {
+        if (TOPMENU.data.isUserLoggedIn) {
+            $("#menu-item-user-profile-nologin").hide();
+            $("#menu-item-user-profile").show();
+            $("#menu-item-course-java-nologin").hide();
+            $("#menu-item-course-java").show();
+        }
+        else {
+            $("#menu-item-user-profile-nologin").show();
+            $("#menu-item-user-profile").hide();
+            $("#menu-item-course-java-nologin").show();
+            $("#menu-item-course-java").hide();
+        }
+    },
+
+    updateViewAsync: function () {
+        $.ajax({
+            type: "GET",
+            url: "/api/rest/user/server/statistics.json?v=2." + new Date().getTime(),
+            data: "",
+            success: function (info) {
+                TOPMENU.data.isUserLoggedIn = (info.sessionId != null);
+                TOPMENU.updateView();
+            }
+        });
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

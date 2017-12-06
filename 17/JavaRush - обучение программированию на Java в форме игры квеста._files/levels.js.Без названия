@@ -1,0 +1,426 @@
+window.controller = {
+    context: {
+        sessionId: null,
+        socialKey: null,
+        userLevel: 0,
+        userLesson: 0,
+        userGold: 0,
+        userSilver: 0,
+        uiLevel:0,
+        tasks: [],
+        unreadedMessagesCount:0
+    },
+
+    main: function (level) {
+        controller.context.uiLevel = level;
+
+        rightpanel.initializeAsync();
+        toppanel.initializeAsync();
+
+        taskeditor.initializeAsync();
+        copyeditor.initializeAsync();
+
+        social.initializeAsync();
+
+        share.initializeVK();
+        share.checkVK();
+        share.initializeAsync();
+
+        NewSubscription.initializeAsync();
+
+        $.ajax({
+            type: "GET",
+            url: "/api/rest/user/server/statistics.json?v=2." + new Date().getTime(),
+            data: "",
+            success: function (info) {
+                if (info.sessionId == null) {
+                     controller.showNoSessionView();
+                }
+                else {
+                    controller.context.sessionId = info.sessionId;
+                    controller.context.unreadedMessagesCount = info.unreadedMessagesCount;
+                    controller.updateViewAsync();
+                }
+            }
+        });
+    },
+
+    showNoSessionView:function()
+    {
+        if (window.location.href == window.top.location.href) { //show all divs and no redirect
+            for (var i = -1; i < 20; i++)
+                controller.showLessonPanel(i, true, false);
+        }
+        else {
+            controller.redirectToLoginPage();
+        }
+    },
+
+    updateViewAsync: function () {
+        $.ajax({
+            type: "GET",
+            url: "/api/rest/user/profile.json?sessionId=" + controller.context.sessionId,
+            data: "",
+            success: function (info) {
+                if (info == null) {
+                    controller.showNoSessionView();
+                }
+                else {
+                    //save actual user data
+                    controller.context.socialKey = info.socialKey;
+                    controller.context.userLevel = info.userLevel;
+                    controller.context.userLesson = info.userLesson;
+                    controller.context.userGold = info.userGold;
+                    controller.context.userSilver = info.userSilver;
+
+                    //new user
+                    if (controller.context.userLevel == 0 && controller.context.userLesson == 1) {
+                        controller.context.userLesson = -1;
+                    }
+
+                    //update view
+                    controller.updateView();
+                    controller.updateUserTaskAsync();
+                    controller.updateCurrentNextButton();
+                    controller.updateRightPanel();
+                    controller.updateShareWindowAsync();
+                    controller.updateSocialWindowAsync();
+
+                    PageMenu.initializeAsync();
+                }
+            }
+        });
+    },
+
+    updateView: function () {
+        if (controller.context.userLevel > controller.context.uiLevel) //show all lessons
+        {
+            for (var i = -1; i < 20; i++)
+                controller.showLessonPanel(i, true, false);
+        }
+        else if (controller.context.userLevel < controller.context.uiLevel) //hide all levels
+        {
+            for (var i = -1; i < 20; i++)
+                controller.showLessonPanel(i, false, false);
+        }
+        else //show current level status
+        {
+            for (var i = -1; i < 20; i++)
+                controller.showLessonPanel(i, (i <= controller.context.userLesson), (i == controller.context.userLesson));
+        }
+
+        //add onclick handler for all NextButtons
+        $("section.lesson button.next_lesson").click(function(){
+            if ($(this).hasClass("fake"))
+                return;
+
+            //$(this).addClass("fake");
+            controller.lessonCompleteAsync();
+        });
+    },
+
+    updateCurrentNextButton: function () {
+        var button = controller.getLessonNextButton(controller.context.userLesson);
+
+        if (controller.context.userGold <= 0)
+            $(button).addClass("nomoney");
+        else
+            $(button).removeClass("nomoney");
+    },
+
+    getLesson: function (index)
+    {
+        if (index >= 0) {
+            var panelCount = $("section.lesson").length;
+            var panel = $("section.lesson").get(panelCount - 1 - index);
+            return (panelCount - 1 - index >= 0) ? panel : null;
+        }
+        else {
+            return $("div.lesson").get(0);
+        }
+    },
+
+    getLessonNextButton: function (index)
+    {
+        if (index >= 0) {
+            var buttonCount = $("section.lesson button.next_lesson").length;
+            var button = $("section.lesson button.next_lesson").get(buttonCount - 1 - index);
+            return (buttonCount - 1 - index >= 0) ? button : null;
+        }
+        else{
+            return $("div.lesson button.next_lesson").get(0);
+        }
+    },
+
+    showLessonPanel: function(number, isShowLesson, isShowNextButton)
+    {
+        var panel = controller.getLesson(number);
+        if (panel == null) return;
+
+        if (isShowLesson) {
+            $(panel).show();
+        } else {
+            $(panel).hide();
+        }
+
+        var button = controller.getLessonNextButton(number);
+        if (button == null) return;
+
+        if (isShowNextButton)
+            $(button).css("visibility", "visible");
+        else
+            $(button).css("visibility", "hidden");
+    },
+
+    lessonCompleteAsync: function () {
+        if (controller.context.userGold <= 0) {
+            var message = controller.context.userSilver < 5 ?
+                "Нужно больше 'Черной материи'. \n Вы можете заработать 'Черную материю' решая задачи." :
+                "Нужно заправить ваш 'Космический корабль'. \n Сделать это можно в <a href='/user/profile'> вашем профиле</a> в разделе 'МОЯ СТРАНИЦА'. " ;
+            toppanel.showErrorPanelAsync(message, 5000);
+        }
+        else {
+            //disable current button - second click prevent
+            var button = controller.getLessonNextButton(controller.context.userLesson);
+            $(button).prop( {disabled: true});
+
+            //call server.user.lessonComplete
+            $.ajax({
+                type: "GET",
+                url: "/api/rest/user/lessonComplete.json?sessionId=" + controller.context.sessionId,
+                data: "",
+                failure: function(errMsg) {
+                    toppanel.showErrorPanelAsync(errMsg, 5000);
+                },
+                success: function (info) {
+                    //gold at show top panel
+                    toppanel.showMoneyDiffPanel(info, controller.context);
+
+                    var isNextLevel = controller.context.userLevel < info.userLevel;
+
+                    //save actual user data
+                    controller.context.userLevel = info.userLevel;
+                    controller.context.userLesson = info.userLesson;
+                    controller.context.userGold = info.userGold;
+                    controller.context.userSilver = info.userSilver;
+
+                    //show next-lesson-panel or next-level-panel
+                    if (isNextLevel) {
+                        //GA: sent new event: next level
+                        ga('send', {
+                            hitType: 'event',
+                            eventCategory: controller.context.userLevel - 1,
+                            eventAction: 'nextLevel',
+                            eventLabel: controller.context.socialKey
+                            /* add custom dimensions here*/
+                        });
+
+                        controller.showLevel(info.userLevel);
+                    }
+                    else {
+                        //GA: sent new event: next lesson
+                        ga('send', {
+                            hitType: 'event',
+                            eventCategory: controller.context.userLevel,
+                            eventAction: 'nextLesson',
+                            eventLabel: controller.context.socialKey
+                            /* add custom dimensions here*/
+                        });
+
+
+                        controller.showLesson(info.userLesson);
+                        controller.updateCurrentNextButton();
+                        controller.updateRightPanel();
+                    }
+                }
+            });
+        }
+    },
+
+    lessonCompleteFakeAsync: function (button) {
+        $(button).css("visibility", "hidden");
+        controller.context.userLesson++;
+        controller.showLesson(controller.context.userLesson);
+    },
+
+    updateRightPanel: function () {
+      rightpanel.updateAsync();
+    },
+
+    updateUserProfileAsync: function () {
+        $.ajax({
+            type: "GET",
+            url: "/api/rest/user/profile.json?sessionId=" + controller.context.sessionId,
+            data: "",
+            success: function (info) {
+                if (info == null) {
+                    controller.showNoSessionView();
+                }
+                else {
+
+                    if (controller.context.userGold != info.userGold || controller.context.userSilver != info.userSilver) {
+                        //gold at show top panel
+                        toppanel.showMoneyDiffPanel(info, controller.context);
+                    }
+
+                    //save actual user data
+                    controller.context.userLevel = info.userLevel;
+                    controller.context.userLesson = info.userLesson;
+                    controller.context.userGold = info.userGold;
+                    controller.context.userSilver = info.userSilver;
+
+                    //update current next button
+                    controller.updateCurrentNextButton();
+                    controller.updateRightPanel();
+                }
+            }
+        });
+    },
+
+    updateShareWindowAsync: function(){
+
+        if (share.checkLevel() && share.data.VK.isUserLoggedIn)
+        {
+            $("#share-dialog").load("share-dialog.html", function () {
+                share.initialize();
+                setTimeout(function(){
+                    share.showAsync();
+                }, 1000);
+            });
+
+        }
+    },
+
+    updateSocialWindowAsync: function () {
+        social.initializeAsync();
+    },
+
+    updateUserTaskAsync:function()
+    {
+        $.ajax({
+            type: "GET",
+            url: "/api/rest/task/list.json?sessionId=" + controller.context.sessionId,
+            data: "",
+            failure: function(errMsg) {
+                toppanel.showErrorPanelAsync(errMsg, 5000);
+            },
+            success: function (info) {
+                controller.context.tasks = (info != null) ? info : [];
+                controller.updateUserTasks();
+            }
+        });
+    },
+
+    updateUserTasks:function()
+    {
+        //get available/unsolved task keys
+        var availableTasksKeys = [];
+        for(var key in controller.context.tasks)
+            availableTasksKeys.push(controller.context.tasks[key].taskKey);
+
+        //get restricted (payed) task keys
+        var restrictedTasksKeys = [];
+        for(var key in controller.context.tasks)
+            if (!controller.context.tasks[key].available)
+                restrictedTasksKeys.push(controller.context.tasks[key].taskKey);
+
+
+        //add disable or enable buttons
+        $("button.task_button").each(function(){
+            var taskKey = $(this).attr('taskKey');
+
+            var sIndex = $.inArray(taskKey, availableTasksKeys);
+            $(this).prop( {disabled: (sIndex == -1)});
+
+            var rIndex = $.inArray(taskKey, restrictedTasksKeys);
+            if (rIndex >= 0)
+                $(this).addClass("restricted");   //gray button
+        });
+
+        //remove old click listeners
+        //$(document).off('click','button.task_button');
+        $("button.task_button").off('click');
+
+        //add onclick handler
+        $("button.task_button").click(function () {
+            var taskKey = $(this).attr('taskKey');
+
+            var rIndex = $.inArray(taskKey, restrictedTasksKeys);
+            if (rIndex >= 0) {
+                var message = "Задачи 11-го уровня и выше доступны только по подписке. \n Купить подписку можно в разделе <a href='/user/subscription'>Мои подписки</a> на странице 'МОЯ СТРАНИЦА'. ";
+                toppanel.showErrorPanelAsync(message, 5000);
+            }
+            else {
+                if (taskKey.indexOf(",task") != -1)          //LessonTask
+                    taskeditor.showAsync(taskKey, this);
+                else if (taskKey.indexOf(",type") != -1)     //TypeTask
+                    copyeditor.showAsync(taskKey, this);
+
+            }
+        });
+
+
+        //futurama ended
+        $("video.movie-futurama").bind("ended", function() {
+            var taskKey = $(this).attr('taskKey');
+            controller.taskCompleteAsync(taskKey);
+        });
+
+    },
+
+    taskCompleteAsync:function(taskKey)
+    {
+        $.ajax({
+            type: "GET",
+            url: "/api/rest/task/complete/"+encodeURIComponent(taskKey)+".json?sessionId=" + controller.context.sessionId,
+            data: "",
+            failure: function(errMsg) {
+                toppanel.showErrorPanelAsync(errMsg, 5000);
+            },
+            success: function (isTaskCompleated) {
+                if (isTaskCompleated)
+                    controller.updateUserProfileAsync();
+            }
+        });
+    },
+
+    showLesson: function (number) {
+        controller.showLessonPanel(number - 1, true, false);
+        controller.showLessonPanel(number, true, true);
+        window.scrollTo(0, 110);
+
+
+        controller.updateUserTaskAsync();
+        ////get restricted (payed) task keys
+        //var restrictedTasksKeys = [];
+        //for(var key in controller.context.tasks)
+        //    if (!controller.context.tasks[key].available)
+        //        restrictedTasksKeys.push(controller.context.tasks[key].taskKey);
+        //
+        ////enable all tasks at current lesson (new tasks)
+        //var lessonPanel = controller.getLesson(controller.context.userLesson);
+        //$(lessonPanel).find("button.task_button").each(function () {
+        //    var taskKey = $(this).attr('taskKey');
+        //
+        //    $(this).prop({disabled: false});
+        //
+        //    var rIndex = $.inArray(taskKey, restrictedTasksKeys);
+        //    if (rIndex >= 0)
+        //        $(this).addClass("restricted");   //gray button
+        //});
+    },
+
+    showLevel: function (number) {
+        if (number < 10)
+            window.location.href = "/levels/level0" + number + ".html"; //switch to next level page
+        else 
+            window.location.href = "/levels/level" + number + ".html"; //switch to next level page
+    },
+
+    redirectToLoginPage: function () {
+        window.location.href = "/login.html"; //switch to login.html
+    }
+
+
+};
+

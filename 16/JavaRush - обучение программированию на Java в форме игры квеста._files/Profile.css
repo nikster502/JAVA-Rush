@@ -1,0 +1,718 @@
+body {
+    background-color: white;
+    color: black;
+    /*font-family: Tahoma, Arial, Verdana, Sans-Serif,​Lucida Sans;*/
+    /*font-size: 11px;*/
+    /*margin: 8px;*/
+
+    font-family: "Times New Roman", "serif";
+    font-size: 12pt;
+
+    margin: 0px;
+    padding: 0px;
+}
+
+.panel-title {
+    font-size: 16pt;
+    color: #333333;
+    height: 40px;
+}
+
+.panel-title-center {
+    font-size: 16pt;
+    color: #333333;
+    height: 40px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.profile-bender-image-panel {
+    width: 800px;
+    height: 450px;
+    margin: auto;
+}
+
+.profile-bender-image {
+    /*width: 800px;*/
+    height: 450px;
+
+    /*background-size: auto 450px;*/
+    background-size:contain;
+    background-repeat:no-repeat;
+    background-position:center;
+    margin: auto;
+    display: block;
+}
+
+.profile-user-image {
+    width: 100px;
+    height: 100px;
+}
+
+.profile-user-name {
+    font-size: 16pt;
+    color: #365F91;
+    font-weight: bold;
+}
+
+.profile-user-level {
+    font-size: 16pt;
+    color: green;
+}
+
+.profile-user-lesson {
+    font-size: 16pt;
+    color: red;
+}
+
+.profile-user-profile {
+    font-size: 12pt;
+    color: #365F91;
+}
+
+.profile-error {
+    font-size: 20pt;
+    color: black;
+    font-weight: bold;
+}
+
+
+.picture-circular {
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    /*background: url(http://javarush.ru/alpha/images/head/amy.png) no-repeat;*/
+    background-size: 100px 100px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+}
+
+/*.profile-user-button {*/
+    /*width: 200px;*/
+    /*height: 100px;*/
+/*}*/
+
+button.profile-user-button
+{
+    background: linear-gradient(#90D351, #599E43) repeat scroll 0 0 transparent;
+    border: 1px solid #5B7D3C;
+    /*border-color: #5B7D3C;*/
+    color: #FFFFFF;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3) inset, 0 1px 2px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: normal;
+    padding: 5px 10px;
+    position: relative;
+    text-decoration: none;
+    width: 200px;
+    height: 37px;
+}
+
+button.profile-user-button[disabled=disabled], button.profile-user-button:disabled {
+    background: linear-gradient(#CCCCCC, #AAAAAA) repeat scroll 0 0 transparent;
+    border: 1px solid #888888;
+    cursor: default;
+}
+
+.public-user-money
+{
+    font-size: 20pt;
+    font-weight: bold;
+}
+
+.profile-user-label {
+    font-size: 13pt;
+    color: #007dad;
+    font-weight: bold;
+}
+
+.profile-user-textbox {
+    font-size: 15pt;
+    color: #007dad;
+    font-weight: bold;
+}
+
+.profile-user-textbox-textbox {
+    background-color: #abb8ae;
+    border-color: black;
+    overflow-y: auto;
+}
+
+.profile-private-user-name {
+    font-size: 16pt;
+    color: #365F91;
+    font-weight: bold;
+    text-align: center;
+}
+
+button.profile-plugin-button
+{
+    width: 400px;
+}
+
+.user-invitee-item {
+    background-color: #90ee90;
+    border: 1px solid #5c965c;
+    vertical-align: middle;
+}
+
+.user-invitee-item-level {
+    background-color: #add8e6;
+    border: 1px solid #6e8290;
+    vertical-align: middle;
+}
+
+.user-invitee-item-used {
+    background-color: #e07196;
+    border: 1px solid #8c465c;
+    vertical-align: middle;
+}
+
+.user-invitee-item-label {
+    vertical-align: middle;
+}
+
+.user-invitee-item-link {
+    vertical-align: middle;
+}
+
+div.user-invitee-item-link a, div.user-invitee-item-link a:visited, div.user-invitee-item-link a:hover
+{
+    color: #1122CC;
+}
+
+.user-invitee-item-header {
+    background-color: white;
+    border: 1px solid black;
+    vertical-align: middle;
+}
+
+
+
+
+.subscripton-level-active {
+    background-color: #90ee90;
+    border: 1px solid #5c965c;
+    vertical-align: middle;
+}
+
+.subscripton-level-ok {
+    background-color: #add8e6;
+    border: 1px solid #6e8290;
+    vertical-align: middle;
+}
+
+.subscripton-level-expired {
+    background-color: #e07196;
+    border: 1px solid #8c465c;
+    vertical-align: middle;
+}
+
+.subscription-label-main {
+    font-size: 12pt;
+    color: #365F91;
+    font-weight: bold;
+    font-family: "Times New Roman", "serif";
+}
+
+.subscription-label-minor {
+    font-size: 12pt;
+    color: black;
+}
+
+.subscription-label-level-number {
+    /*color: #333333;*/
+    font-size: 10pt;
+
+}
+
+.subscripton-level-yes {
+    background-color: #599E43;
+    border: 1px solid #1a291a;
+    vertical-align: middle;
+    text-align: center;
+    color: #223f1b;
+}
+
+.subscripton-level-no {
+    background-color: #fabfd7;
+    border: 1px solid #8c465c;
+    vertical-align: middle;
+    text-align: center;
+    color: #8c465c;
+}
+
+.subscripton-level-yes-in-progress {
+    background-color: #e8fac2;
+    border: 1px solid #3b5a3b;
+    vertical-align: middle;
+    text-align: center;
+    color: #345f28;
+}
+
+
+td.premium-desc
+{
+    text-align: left;
+}
+td.premium-desc2
+{
+    text-align: left;
+    text-indent: 50px;
+}
+
+
+td.premium-info
+{
+    text-align: center;
+}
+
+
+div.payment-no
+{
+    content: "";
+    display: block;
+    height: 28px;
+    margin-left: 80px;
+    /*margin-top: -14px;*/
+    position: absolute;
+    width: 28px;
+}
+div.payment-yes
+ {
+     background: url("http://javarush.ru/images/pricing-plans-checked.png") no-repeat scroll 0 0 / 28px 28px transparent;
+     content: "";
+     display: block;
+     height: 28px;
+     margin-left: 70px;
+     margin-top: 3px;
+     /*margin-top: -14px;*/
+     position: absolute;
+     width: 28px;
+ }
+
+div.payment-yes-popular
+{
+    background: url("http://javarush.ru/images/pricing-plans-featured-checked.png") no-repeat scroll 0 0 / 28px 28px transparent;
+    content: "";
+    display: block;
+    height: 28px;
+    margin-left: 70px;
+    margin-top: 3px;
+    /*margin-top: -14px;*/
+    position: absolute;
+    width: 28px;
+}
+
+.payment-tariff-row
+{
+    /*border-bottom: 1px solid green;*/
+    /*border-top: 1px solid red;*/
+    /*border-right: 1px solid blue;*/
+    /*border-left: 1px solid #8b4513;*/
+
+    border-collapse: collapse;
+    border: 1px solid #DDDDDD;
+    margin-bottom: -1px;
+    /*background-color: #949494;*/
+    background-color: #8d9a90;
+}
+
+.payment-tariff-table
+{
+    background-color: white;
+    color: black;
+
+    border-collapse: collapse;
+    border: 1px solid #DDDDDD;
+}
+
+table.payment-tariff-table td table td div
+{
+    /*border: 1px solid #9acd32;*/
+    /*background-color: yellow;*/
+    vertical-align: middle;
+}
+
+.payment-tariff-table-odd
+{
+    /*background-color: #EEEEEE;*/
+    background-color: #5c6e60;
+    /*background-color: red;*/
+}
+
+.subscription-panel {
+    /*background-color: white;*/
+}
+
+.payment-tariff-row td
+{
+    border: 1px solid #DDDDDD;
+    border-collapse: collapse;
+    vertical-align: middle;
+}
+
+.payment-tariff-table-header {
+    background-color:  #DDFFDD;
+    text-align: center;
+    vertical-align: middle;
+
+    border: 1px solid #DDDDDD;
+    border-collapse: collapse;
+}
+
+.payment-tariff-table-header-label
+{
+    text-align: center;
+}
+
+.payment-tariff-table-header-label-popular
+{
+    text-align: center;
+    color: black;
+    font-weight: bold;
+    background-color: #ffb66c;
+    border-color: #ff4500;
+}
+
+.payment-tariff-table-header-label-popular2
+{
+    text-align: center;
+    /*color: #ff4500;*/
+    color: black;
+    font-weight: bold;
+    background-color: #ffb66c;
+    border-color: #ff4500;
+    border-radius: 10px 10px 0px 0px;
+    font-size: 12pt;
+
+}
+
+
+.payment-tariff-row-footer {
+    background-color: #e07196;
+}
+
+.payment-tariff-table-footer-label
+{
+    text-align: center;
+    vertical-align: middle;
+}
+
+button.profile-tariff-button
+{
+    background: linear-gradient(#90D351, #599E43) repeat scroll 0 0 transparent;
+    border: 1px solid #5B7D3C;
+    /*border-color: #5B7D3C;*/
+    color: #FFFFFF;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3) inset, 0 1px 2px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: normal;
+    padding: 5px 10px;
+    position: relative;
+    text-decoration: none;
+}
+
+button.profile-tariff-button-pause
+{
+    background: linear-gradient(#90D351, #599E43) repeat scroll 0 0 transparent;
+    border: 1px solid #5B7D3C;
+    /*border-color: #5B7D3C;*/
+    color: #FFFFFF;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3) inset, 0 1px 2px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    font-weight: bold;
+    line-height: normal;
+    padding: 5px 10px;
+    position: relative;
+    text-decoration: none;
+}
+
+button.profile-tariff-button-popular
+{
+    background: linear-gradient(#ffb66c, #ffa100) repeat scroll 0 0 transparent;
+    border: 1px solid #ff4500;
+    /*border-color: #5B7D3C;*/
+    /*color: #FFFFFF;*/
+    color: black;
+    /*text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);*/
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3) inset, 0 1px 2px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: normal;
+    padding: 5px 10px;
+    position: relative;
+    text-decoration: none;
+}
+
+button.subscription-button-upgrade
+{
+    font-size: 10pt;
+}
+
+.price5invitee
+{
+    letter-spacing: -0.05em;
+    padding: 0px;
+    font-weight: 100;
+}
+
+button.profile-tariff-button[disabled=disabled], button.profile-tariff-button:disabled {
+    background: linear-gradient(#CCCCCC, #AAAAAA) repeat scroll 0 0 transparent;
+    border: 1px solid #888888;
+    cursor: default;
+}
+
+
+button.profile-paypal-button
+{
+    background-color: #5c6e60;
+    border: 0px;
+    cursor: pointer;
+}
+
+.profile-left-menu
+{
+    text-decoration: none;
+    color: black;
+}
+
+table.profile-left-menu tbody tr td div a, table.profile-left-menu tbody tr td div a:visited {
+    text-decoration: none;
+    color: black;
+}
+
+table.profile-left-menu tbody tr td div a:hover {
+    text-decoration: underline;
+    cursor: hand;
+    /*color: white;*/
+    /*font-weight: bold;*/
+}
+
+.left-menu-item
+{
+    font-weight: normal;
+}
+
+.left-menu-item-active
+{
+ font-weight: bold;
+}
+
+.users-search-button {
+
+}
+
+.users-panel-table {
+
+}
+
+
+table.users-panel-table tr td div img
+{
+    width: 50px;
+    height: 50px;
+}
+
+.user-news-item-signup {
+    background-color: #5e71ff;
+    border: 1px solid black;
+    margin-bottom: -1px;
+}
+
+.user-news-item-signin {
+    background-color: #8aeeff;
+    border: 1px solid black;
+    margin-bottom: -1px;
+}
+
+.user-news-item-task-solving {
+    background-color: #93ffdb;
+    border: 1px solid black;
+    margin-bottom: -1px;
+}
+
+.user-news-item-task-solved {
+    background-color: #3bff40;
+    border: 1px solid black;
+    margin-bottom: -1px;
+}
+
+.user-news-item-lesson-up {
+    background-color: #ffb6c1;
+    border: 1px solid black;
+    margin-bottom: -1px;
+}
+
+.user-news-item-level-up {
+    background-color: #ff767b;
+    border: 1px solid black;
+    margin-bottom: -1px;
+}
+
+.user-news-item-xxx {
+    background-color: #ffb6c1;
+    border: 1px solid black;
+    margin-bottom: -1px;
+}
+
+
+
+
+.user-message-item {
+    background-color: #e1e5ee;
+    border: 1px solid #919690;
+    vertical-align: middle;
+}
+
+.user-message-item-unreaded {
+    background-color: #90ee90;
+    border: 1px solid #5c965c;
+    vertical-align: middle;
+}
+
+.message-single-panel {
+   background-color: yellow;
+   border: 1px solid #919690;
+}
+
+.message-single-panel2 {
+    background-color: #f5f5f5;
+    border: 25px solid gray;
+    /*margin: 25px;*/
+
+}
+
+.message-single-panel3 {
+    background-color: #f5f5f5;
+}
+
+.message-single-panel-photo {
+
+}
+
+.payment-tariff-end-row td
+{
+    border: 1px solid transparent;
+    border-collapse: collapse;
+    vertical-align: middle;
+}
+
+.partner-table thead {
+    background-color: #f5f5f5;
+}
+
+.user-partner-item {
+    background-color: #90ee90 !important;
+    vertical-align: middle;
+}
+
+tr.user-partner-item td {
+    border: 0px;
+    border-bottom: 1px solid #6F7277;
+}
+
+.user-partner-item-level {
+    background-color: #add8e6 !important;
+    vertical-align: middle;
+}
+
+tr.user-partner-item-level td {
+    border: 0px;
+    border-bottom: 1px solid #6F7277;
+}
+
+.subscription-message-main {
+   /*background-color: #ffc0cb;*/
+   background-color: #cbf3b5;
+    border: 1px solid black;
+    color: black;
+}
+
+.profile-user-attach-vk {
+    width: 300px;
+    height: 25px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+
+    background-color: #a5b6ee;
+    border: 1px solid #4c5196;
+    vertical-align: middle;
+
+    color: #000b64;
+    font-weight: bold;
+}
+
+.profile-user-detach-vk {
+    width: 300px;
+    height: 25px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+
+    background-color: #90ee90;
+    border: 1px solid #5c965c;
+    vertical-align: middle;
+
+    color: red;
+    font-weight: bold;
+}
+
+.profile-subscription-action-zoidberg
+{
+    line-height: 80px;
+    font-weight: bold;
+    font-size: 20px;
+    color: #ffcb86;
+    margin-left: 50px;
+    margin-right: -50px;
+}
+
+
+.currency-selection-dialog {
+    /*background-color: #a1ed5b;*/
+    background-color: #5c6e60;
+    border: 2px solid #006400;
+
+    box-shadow: 0 0 40px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 15px 15px 10px 0px rgba(50, 50, 50, 0.75);
+    -moz-box-shadow:    15px 15px 10px 0px rgba(50, 50, 50, 0.75);
+    box-shadow:         15px 15px 10px 0px rgba(50, 50, 50, 0.75);
+}
+
+.currency-selection-dialog-close-button
+{
+    background: linear-gradient(#CCCCCC, #AAAAAA) repeat scroll 0 0 transparent;
+    border: 1px solid #888888;
+    cursor: default;
+    color: black;
+
+    width: 20px;
+    height: 20px;
+    display: none;
+}
+
+.currency-selection-dialog-currency-button
+{
+
+}
+
+.confirmation-dialog-message
+{
+    color: #FFFFFF;
+
+}

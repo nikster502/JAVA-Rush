@@ -1,0 +1,1233 @@
+
+window.rightpanel = {
+    context: {},
+
+    initializeAsync:function()
+    {
+        $("#right-panel-dialog").load("right-panel-dialog.html", function () {
+            rightpanel.initialize();
+        });
+    },
+
+    initialize:function()
+    {
+        //do nothing
+    },
+
+    updateAsync: function ()
+    {
+        var context = controller.context;
+        $("#pMoneyGoldMessageX").html(context.userGold > 0 ? ("+" + context.userGold) : context.userGold);
+        $("#pMoneySilverMessageX").html(context.userSilver > 0 ? ("+" + context.userSilver) : context.userSilver);
+        $("#pUnsolvedTaskMessageX").html("+" + context.tasks.length);
+        $("#pUnreadedMailMessageX").html("+" + context.unreadedMessagesCount);
+    }
+};
+
+/**
+ *
+ *  TOP PANEL FOR MESSAGES
+ */
+window.toppanel = {
+    context: {
+        isInfoVisible: false,
+        isMoneyVisible: false
+    },
+
+    initializeAsync:function()
+    {
+        $("#top-panel-dialog").load("toppanel-dialog.html", function () {
+            toppanel.initialize();
+        });
+    },
+
+    initialize:function()
+    {
+        //do nothing
+    },
+
+    showErrorPanelAsync: function (message, time) {
+        //window.alert(message);
+        toppanel.showInfoPanelAsync(message, time);
+    },
+
+    showInfoPanelAsync: function (message, time) {
+        message = message.replace(/(?:\r\n|\r|\n)/g, '<br />');
+
+        $("#pInfoMessage").html(message);
+        $("#idInfoPanel").show();
+        toppanel.isInfoVisible = true;
+
+        $("#pTopMessagePanel").show();
+
+        setTimeout(toppanel.hideInfoPanel, time);
+    },
+
+    hideInfoPanel: function () {
+        $("#idInfoPanel").hide();
+        toppanel.isInfoVisible = false;
+
+        if (!toppanel.isInfoVisible && !toppanel.isMoneyVisible)
+            $("#pTopMessagePanel").hide();
+    },
+
+    showGamePanelAsync: function (actor, message, time) {
+
+    },
+
+    showMoneyDiffPanel: function (newInfo, oldInfo) {
+        if (oldInfo.userGold == newInfo.userGold && oldInfo.userSilver == newInfo.userSilver)
+            return;
+
+        if (oldInfo.userGold != newInfo.userGold) {
+            var diff = newInfo.userGold - oldInfo.userGold;
+            var message = diff < 0 ? ("" + diff) : ("+" + diff);
+            $("#pMoneyGoldMessage").html(message);
+
+            $("#pMoneyGoldMessage").show();
+            $("#pMoneySilverMessage").hide();
+        }
+        else if (oldInfo.userSilver != newInfo.userSilver) {
+            var diff = newInfo.userSilver - oldInfo.userSilver;
+            var message = diff < 0 ? ("" + diff) : ("+" + diff);
+            $("#pMoneySilverMessage").html(message);
+
+            $("#pMoneyGoldMessage").hide();
+            $("#pMoneySilverMessage").show();
+        }
+
+        $("#idMoneyPanel").show();
+        toppanel.isMoneyVisible = true;
+
+        $("#pTopMessagePanel").show();
+
+        setTimeout(toppanel.hideMoneyPanel, 3000);
+    },
+
+    hideMoneyPanel:function()
+    {
+        $("#idMoneyPanel").hide();
+        toppanel.isMoneyVisible = false;
+
+        if (!toppanel.isInfoVisible && !toppanel.isMoneyVisible)
+            $("#pTopMessagePanel").hide();
+    }
+};
+
+
+/**
+ *
+ * TASK EDITOR
+ */
+window.taskeditor = {
+    context:{
+        editor:null,
+        tasks : {},
+        currentTask : {
+            button:null,
+
+            taskKey:null,
+            title:"",
+            description:"",
+
+            gold:0,
+            silver:0,
+
+            filename:"Solution.java",
+            package:"",
+            templateCode:"",
+            contentCode:""
+        }
+
+    },
+
+    initializeAsync:function()
+    {
+        var htmlFile = controller.context.uiLevel <= 1 ? "code-task-dialog-simple.html" : "code-task-dialog.html";
+
+        $("#code-task-dialog").load(htmlFile, function () {
+            taskeditor.initialize();
+        });
+    },
+
+    initialize:function()
+    {
+        taskeditor.context.editor = ace.edit("pCodeEditor_JavaEditor");
+        var editor = taskeditor.context.editor;
+
+        editor.setTheme("ace/theme/github");
+        editor.getSession().setMode("ace/mode/java");
+        editor.getSession().setTabSize(4);
+        editor.getSession().setUseSoftTabs(true);
+        editor.getSession().setUseWrapMode(true);
+        editor.setHighlightActiveLine(true);
+        editor.renderer.setPrintMarginColumn(100);
+
+        var langTools = window.ace.require("ace/ext/language_tools");
+        editor.setOptions({
+            enableBasicAutocompletion: true,
+            enableLiveAutocompletion: true,
+            enableSnippets: false,
+            spellcheck:true  });
+
+        //langTools.addCompleter(completer);
+    },
+
+    getCurrentTask:function()
+    {
+        return taskeditor.context.tasks[taskeditor.context.currentTaskKey];
+    },
+
+    setCurrentTaskKey: function (taskKey) {
+        taskeditor.context.currentTaskKey = taskKey;
+
+        if (taskeditor.context.tasks[taskKey] == null) {
+            taskeditor.context.tasks[taskKey] = {
+                button: null,
+
+                taskKey: null,
+                title: "",
+                description: "",
+
+                gold: 0,
+                silver: 0,
+
+                filename: "Solution.java",
+                package: "",
+                templateCode: "",
+                contentCode: ""
+            };
+        }
+    },
+
+    showAsync:function(taskKey, button)
+    {
+        $.ajax({
+            type: "GET",
+            url: "/api/rest/task/template/"+encodeURIComponent(taskKey)+".json?sessionId=" + controller.context.sessionId,
+            data: "",
+            failure: function(errMsg) {
+                toppanel.showErrorPanelAsync(errMsg, 5000);
+            },
+            success: function (data, button) {
+                taskeditor.setCurrentTaskKey(taskKey);
+                var task = taskeditor.getCurrentTask();
+
+                task.button = button;
+
+                task.taskKey = data.taskKey;
+                task.title = data.title;
+                task.description = data.description;
+                task.gold = data.gold;
+                task.silver = data.silver;
+
+                var template = data.template[0];
+                task.filename = template.FileName;
+                task.package = template.Package;
+                task.templateCode = template.ContentCode;
+
+                //set up current-task-code
+                if (task.contentCode.length == 0)
+                    task.contentCode = template.ContentCode;
+
+                taskeditor.show();
+            }
+        });
+    },
+
+    show:function()
+    {
+        var task = taskeditor.getCurrentTask();
+
+        //set java template code
+        this.context.editor.setValue(task.contentCode);
+
+        //set task description
+        $("#pCodeEditorTaskDescriptionArea").val(task.description);
+
+        //clear old task selection
+        this.context.editor.clearSelection();
+
+        //set up output-area
+        $("#pCodeEditorTaskOutputArea").val("Запустите программу, чтобы увидеть, что она выводит на экран.");
+
+        //show task editor
+        $("#pCodeEditor").show();
+
+        //GA: sent new event: task get
+        ga('send', {
+            hitType: 'event',
+            eventCategory: controller.context.userLevel,
+            eventAction: 'getTask',
+            eventLabel: task.taskKey,
+            dimension1: taskeditor.getGaDimension1(), //07
+            dimension2: taskeditor.getGaDimension2()  //10.13
+        });
+
+        task.startTime = new Date();
+    },
+
+    hide:function()
+    {
+        this.getCurrentTask().contentCode = this.context.editor.getValue();
+
+        $("#pCodeEditor").hide();
+
+        //GA: sent new event: task time
+        var task = taskeditor.getCurrentTask();
+        var seconds = Math.round((new Date().getTime() - task.startTime.getTime()) / 1000);
+        ga('send', {
+            hitType: 'event',
+            eventCategory: controller.context.userLevel,
+            eventAction: 'taskTime',
+            eventLabel: task.taskKey,
+            eventValue: seconds,
+            dimension1: taskeditor.getGaDimension1(), //07
+            dimension2: taskeditor.getGaDimension2(),  //10.13
+            metric1:    seconds
+        });
+    },
+
+    fullscreen:function()
+    {
+        if ($("#pCodeEditor").hasClass("maximized"))
+            $("#pCodeEditor").removeClass("maximized");
+        else
+            $("#pCodeEditor").addClass("maximized");
+
+        var editor = taskeditor.context.editor;
+        editor.resize();
+    },
+
+    runTaskAsync:function()
+    {
+        var $this = this;
+
+        var task = taskeditor.getCurrentTask();
+        task.contentCode = this.context.editor.getValue();
+        var inputData =  $("#pCodeEditorTaskInputArea").val();
+
+        var info = {
+            sessionId:  controller.context.sessionId,
+            taskKey:    task.taskKey,
+            inData:     inputData != null ? inputData : "",
+            Package:    task.package,
+            FileName:   task.filename,
+            ContentCode: task.contentCode
+        };
+
+        //GA: sent new event: task validate
+        ga('send', {
+            hitType: 'event',
+            eventCategory: controller.context.userLevel,
+            eventAction: 'validateTask',
+            eventLabel: task.taskKey,
+            dimension1: taskeditor.getGaDimension1(), //07
+            dimension2: taskeditor.getGaDimension2()  //10.13
+        });
+
+        var buttonRun = $("button.code-editor-run-button");
+        buttonRun.hide();
+
+        var json_str = JSON.stringify(info); //info to JSON
+        $.ajax({
+            type: "POST",
+            url: "/api/rest/task/validate.json?sessionId=" + controller.context.sessionId,
+            data: json_str,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function(validateResponse){
+                buttonRun.show();
+                $this.runTaskAsyncCallback(validateResponse); //multiply task editor support
+            },
+            failure: function(errMsg) {
+                buttonRun.show();
+                toppanel.showErrorPanelAsync(errMsg, 5000);
+            }
+        });
+    },
+
+
+    runTaskAsyncCallback: function(validateResponse)
+    {
+        if (validateResponse.ErrorCode!="Success")
+            return toppanel.showErrorPanelAsync( this.getErrorMessage(validateResponse), 4000);
+
+        var result = validateResponse.Result;
+
+        //update status output
+        this.updateStatus({
+            compilationStatus: result.compilationStatus,
+            compilationOutput: result.compilationOutput,
+
+            runStatus: result.runStatus,
+            runOutput: result.runOutput,
+
+            validationStatus: result.validationStatus,
+            validationPassedTestCount: result.validationPassedTestCount,
+            validationMaxTestCount: result.validationMaxTestCount,
+
+            helpTestStatus: result.helpTestStatus
+        });
+
+
+        var task = taskeditor.getCurrentTask();
+        if (result.validationStatus == "SUCCESS") {
+
+            //disable task button when task solved
+            //$("#" + task.button).attr("disabled", "disabled");
+            $("button.task_button[taskKey='" + taskeditor.context.currentTaskKey + "']").prop( {disabled: true});
+
+            //update money
+            controller.updateUserProfileAsync();
+
+            //GA: sent new event: task complete
+            ga('send', {
+                hitType: 'event',
+                eventCategory: controller.context.userLevel,
+                eventAction: 'completeTask',
+                eventLabel: task.taskKey,
+                dimension1: taskeditor.getGaDimension1(), //07
+                dimension2: taskeditor.getGaDimension2()  //10.13
+            });
+        }
+        else {
+            //show validation fails message
+            var message = this.getInfoMessage(result);
+            toppanel.showInfoPanelAsync(message, 10000);
+        }
+    },
+
+    updateStatus: function (status) {
+        var s = "";
+        if (status.compilationStatus != "SUCCESS") {
+            s += "✗ Программа не компилируется. Ищите ошибку. Вот что вернул компилятор:\n" + status.compilationOutput;
+        }
+        else {
+            s += "✓ Программа скомпилировалась без ошибок.\n";
+            if (status.runStatus != "SUCCESS") {
+                if (status.runStatus == "TIMEOUT_ERROR")
+                    s += "✗ Программа работала слишком долго и была закрыта. \n \n Подсказка:\n Скорее всего у вас в программе есть цикл, который работает вечно. \n Или вы читаете данные с клавиатуры, а по условию этого нет.";
+                else if (status.runStatus == "MAIN_CLASS_NOT_FOUND_ERROR")
+                    s += "✗ Метод main не найден: программа не запускалась, но тестировалась. \n \n Подсказка:\n Если метода main не было изначально - все в порядке. \n Если хотите, вы можете добавить его и использовать для отладки программы. На проверку задачи это никак не повлияет.";
+                else
+                    s += "✗ Во время работы программы возникла ошибка:\n" + (status.runOutput != null ? status.runOutput : "" );
+            }
+            else {
+                if (status.validationStatus != "SUCCESS")
+                    s += "✗ Программа нормально отработала, но не прошла тестирование.\n";
+                else
+                    s += "✓ Программа прошла все тесты. Вы выполнили задание! \n";
+                s += "  Вот что программа вывела на экран за время работы:\n\n" + status.runOutput;
+            }
+        }
+
+        $("#pCodeEditorTaskOutputArea").val(s);
+    },
+
+    errors: {
+        Success: "Все просто отлично!",
+        AuthorizationError: "Ошибка авторизации",
+        RequestTimeout: "Программа выполнялась слишком долго",
+        ServerUnavailable: "Сервер недоступен :(",
+        ApiVersionMismatch: "API сервера сильно отличается",
+
+        UnknownUser: "Такой пользователь не найден",
+        UnknownTask: "Такая задача не найдена",
+        TaskSolved: "Задача уже решена",
+        TaskUnavailable: "Задача вам недоступна",
+        AccessDenied: "Доступ запрещен",
+        UnknownError: "Неизвестная ошибка"
+    },
+
+    getErrorMessage: function (response) {
+        var message = this.errors[response.ErrorCode];
+
+        if (response.ErrorMessage != null)
+            message += " " + esponse.ErrorMessage;
+
+        return message;
+    },
+
+    compilationHelps:{
+        SUCCESS: "Компиляция прошла успешно.",
+        UNKNOWN_ERROR: "Программу не удалось скомпилировать.\n Подробная информация в поле вывода программы. \n Так же просмотрите внимательно ваш код, возможно, вы заметите там ошибки.",
+        SAVE_ERROR: "Программу не удалось скомпилировать.\n Произошел сбой во время сохранения файлов.\n Если такое повторится - обновите страницу через Ctrl+F5.",
+        QUOTE_EXPECTED_ERROR: "Программу не удалось скомпилировать.\n Похоже, что вы забыли закрыть кавычки.",
+        SEMICOLON_EXPECTED_ERROR: "Программу не удалось скомпилировать.\n Вы где-то забыли поставить точку с запятой.",
+        BRACE_EXPECTED_ERROR: "Программу не удалось скомпилировать.\n Вы забыли закрыть фигурную скобку. \n Для каждой открывающей скобки '{', должна быть своя закрывающая '}'.",
+        PARENTHESIS_EXPECTED_ERROR: "Программу не удалось скомпилировать.\n Вы где-то забыли круглую скобку.\n Подсчитайте количество скобок  '(' и ')', их число должно быть одинаковым .",
+        NOT_A_STATEMENT_ERROR: "Программу не удалось скомпилировать.\n Компилятор нашел что-то, что точно не может быть командой. \n Гляньте в свой код, возможно, вы тоже заметите ЭТО."
+    },
+
+    additionalHelps:{
+        UNKNOWN : "Программа работает неправильно. \n Возможно, вы что-то не учли или невнимательно прочли условие.\n Упрямство - отличная черта характера, помните об этом!",
+        MISPRINT : "Похоже, что у вас <b>мелкая опечатка в коде</b>. \n Текст, который вывела ваша программа, совпадает с ожидаемым больше чем на 80%.\n Что делать? Искать опечатку. ",
+        NO_OUTPUT : "Ваша программа вообще ничего не вывела на экран. А мы столько от нее ожидали... \n Подумайте над этим!",
+        NEGATIVE_NUMBERS_SUPPORT : "Ага! Похоже, что вы забыли, что числа бывают еще и отрицательными.\n Это же первый класс школы. У вас есть оправдание, только если вы из детсада :P \n Проверьте, как ваша программа работает на отрицательных числах.",
+        EQUAL_NUMBERS_SUPPORT : "А как поведет себя ваша программа, если в нее передать несколько одинаковых чисел? \n А все?",
+        MIN_BUT_MAX : "В условии сказано, что функция должны возвращать минимум, а у вас - максимум. \n Максимализм - это нехорошо. ",
+        MAX_BUT_MIN : "В условии сказано, что функция должны возвращать максимум, а у вас - минимум. \n Минимализм - это нехорошо.",
+        TOO_MACH_OUTPUT : "У вас отличная программа, но она печатает на экран <b>слишком много</b> текста.\n Его смело можно урезать вдвое. ",
+        HELP_TOO_LITTLE_OUTPUT : "Ваша программа вывела на экран <b>слишком мало</b> текста. \n Гораздо меньше, чем мы от нее ожидали.",
+        HELP_ZERO_NUMBERS_SUPPORT : "Природа не терпит пустоты. \n А ваша программа, похоже не умеет обращаться с нулями. \n Проверьте, как она работает, если в нее передать 0.",
+        HELP_PARAMS_ORDER_REVERSED : "Ваша программа работает неправильно. \n Но если в нее передать параметры в обратно порядке - то все работает. \n Может вам стоит перечитать условие - вдруг там указан точный порядок!!",
+        ONE_LINE_EXPECTED : "Смело! Но ожидалась всего одна единственная строчка! \n Короче - низачет."
+    },
+
+    successMessages:[
+        "Вы написали правильную программу - она прошла все тесты.\n Вы - молодец!",
+        "Молодец!\n Ну можешь же, когда хочешь!",
+        "Красавчик!\n Программа все делает правильно.",
+        "Ты сделал это! \n Программа прошла все тесты. \n Я верил в тебя до последнего.",
+        "Другого я от тебя и не ожидал. \n Молодец!",
+        "Вот это, я понимаю, результат! \n Другим бы стоило у тебя поучиться... \n Все работает просто великолепно"
+    ],
+
+    getInfoMessage:function(status)
+    {
+
+        if (status.compilationStatus != "SUCCESS")
+        {
+            return this.compilationHelps[status.compilationStatus];
+        }
+
+        if (status.validationStatus == "SUCCESS")
+        {
+            var n = this.successMessages.length;
+            var i = Math.floor(Math.random() * n); //0..n-1
+            return this.successMessages[i];
+        }
+        else
+        {
+            return this.additionalHelps[status.helpTestStatus];
+        }
+    },
+
+    clearInputHelpMessage:function()
+    {
+        var text = $("#pCodeEditorTaskInputArea").val();
+        if (text!=null && text.length>100)
+        {
+            $("#pCodeEditorTaskInputArea").val("");
+        }
+    },
+
+    openHelpWindow:function()
+    {
+        var task = taskeditor.getCurrentTask();
+        var keyname = task.package.substring(18);//com.javarush.test.level06.lesson11.home02 -> level06.lesson11.home02
+        var url = "http://help.javarush.ru/search/?q=" + keyname;
+
+        window.open(url, "_blank");
+    },
+
+    /**
+     * level01,lesson04,type02 ---> 01
+     */
+    getGaDimension1:function()
+    {
+        if (taskeditor.context.currentTaskKey != null)
+            return taskeditor.context.currentTaskKey.substr(5, 2);
+        return null;
+    },
+
+    /**
+     * level01,lesson04,type02 ---> 01.04
+     */
+    getGaDimension2:function()
+    {
+        if (taskeditor.context.currentTaskKey != null)
+            return taskeditor.context.currentTaskKey.substr(5, 2)+"."+taskeditor.context.currentTaskKey.substr(14, 2);
+        return null;
+    }
+};
+
+
+
+/**
+ *
+ * COPY TASK EDITOR
+ */
+window.copyeditor = {
+    context:{
+        editorOriginal:null,
+        editorUser:null,
+        tasks : {},
+        currentTask : {
+            button:null,
+
+            taskKey:null,
+            title:"",
+            description:"",
+
+            gold:0,
+            silver:0,
+
+            package:"",
+            filename:"",
+            originalCode:"",
+            contentCode:""
+        }
+    },
+
+    initializeAsync:function()
+    {
+        $("#type-task-dialog").load("type-task-dialog.html", function () {
+            copyeditor.initialize();
+        });
+    },
+
+    initialize:function()
+    {
+        //initialize Original Code Editor
+        copyeditor.context.editorOriginal = this.initializeJavaEditor("pCopyEditorOriginalCode_JavaEditor");
+        copyeditor.context.editorOriginal.setReadOnly(true);
+        copyeditor.context.editorOriginal.getSession().selection.on('changeSelection', function() {
+            copyeditor.context.editorOriginal.clearSelection();
+        });
+
+        //initialize User Code Editor
+        copyeditor.context.editorUser = this.initializeJavaEditor("pCopyEditorUserCode_JavaEditor");
+        copyeditor.context.editorUser.getSession().on('change', function() {
+            copyeditor.validateCodeEquality();
+        });
+    },
+
+    initializeJavaEditor: function(divID)
+    {
+        var editor = ace.edit(divID);
+
+        editor.setTheme("ace/theme/github");
+        editor.getSession().setMode("ace/mode/java");
+        editor.getSession().setTabSize(4);
+        editor.getSession().setUseSoftTabs(true);
+        editor.getSession().setUseWrapMode(true);
+        editor.setHighlightActiveLine(true);
+
+        return editor;
+    },
+
+
+    getCurrentTask:function()
+    {
+        return copyeditor.context.tasks[copyeditor.context.currentTaskKey];
+    },
+
+    setCurrentTaskKey: function (taskKey) {
+        copyeditor.context.currentTaskKey = taskKey;
+
+        if (copyeditor.context.tasks[taskKey] == null) {
+            copyeditor.context.tasks[taskKey] = {
+                button: null,
+
+                taskKey: null,
+                title: "",
+                description: "",
+
+                gold: 0,
+                silver: 0,
+
+                package: "",
+                filename: "",
+                originalCode: "",
+                contentCode: ""
+            };
+        }
+    },
+
+    showAsync:function(taskKey, button)
+    {
+        $.ajax({
+            type: "GET",
+            url: "/api/rest/task/template/" + encodeURIComponent(taskKey) + ".json?sessionId=" + controller.context.sessionId,
+            data: "",
+            failure: function(errMsg) {
+                toppanel.showErrorPanelAsync(errMsg, 5000);
+            },
+            success: function (data) {
+                copyeditor.setCurrentTaskKey(taskKey);
+                var task = copyeditor.getCurrentTask();
+
+                task.button = button;
+
+                task.taskKey = data.taskKey;
+                task.title = data.title;
+                task.description = data.description;
+                task.gold = data.gold;
+                task.silver = data.silver;
+
+                var template = data.template[0];
+                task.filename = template.FileName;
+                task.package = template.Package;
+                task.originalCode = template.ContentCode;
+
+                copyeditor.show();
+            }
+        });
+    },
+
+    show:function()
+    {
+        var task = copyeditor.getCurrentTask();
+
+        //set java original code
+        this.context.editorOriginal.setValue(task.originalCode);
+
+        //set java user code
+        this.context.editorUser.setValue(task.contentCode);
+
+        //clear old task selection
+        this.context.editorOriginal.clearSelection();
+        this.context.editorUser.clearSelection();
+
+        //show task editor
+        $("#pCopyEditor").show();
+
+    },
+
+    hide:function()
+    {
+        this.getCurrentTask().contentCode = this.context.editorUser.getValue();
+
+        $("#pCopyEditor").hide();
+    },
+
+    validateCodeEquality:function()
+    {
+        var originalCode = copyeditor.context.editorOriginal.getValue();
+        var userCode = copyeditor.context.editorUser.getValue();
+
+        //compare
+        var canonicalOriginalStr = copyeditor.getCanonicalString(originalCode);
+        var canonicalUserStr = copyeditor.getCanonicalString(userCode);
+
+        var isUserCodeRight = canonicalOriginalStr.indexOf(canonicalUserStr) == 0 //canonicalOriginalStr start with canonicalUserStr
+        $("#pCopyEditor").css("backgroundColor", isUserCodeRight ? "#90ee90" : "#eebbc7");
+
+        //complete task
+        var isOriginalCodeNotEmpty = canonicalOriginalStr != null && canonicalOriginalStr.length > 3;
+        var isUserCodeNotEmpty = canonicalUserStr != null && canonicalUserStr.length > 3;
+
+        if (canonicalOriginalStr == canonicalUserStr &&  isOriginalCodeNotEmpty && isUserCodeNotEmpty)
+        {
+            copyeditor.completeTaskAsync();
+        }
+    },
+
+    getCanonicalString:function(s)
+    {
+        if (s == null) return null;
+
+        s = s.replace(new RegExp("\r","g"), " ");
+        s = s.replace(new RegExp("\n","g"), " " );
+        s = s.replace(new RegExp("\t","g"), " ");
+        s = s.replace(new RegExp("     ","g"), " ");
+        s = s.replace(new RegExp("    ","g"), " ");
+        s = s.replace(new RegExp("   ","g"), " ");
+        s = s.replace(new RegExp("  ","g"), " ");
+
+        return s.trim();
+    },
+
+    completeTaskAsync:function()
+    {
+        var $this = this;
+
+        var task = copyeditor.getCurrentTask();
+
+        $.ajax({
+            type: "GET",
+            url: "/api/rest/task/complete/" + encodeURIComponent(task.taskKey) + ".json?sessionId=" + controller.context.sessionId,
+            data: "",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function(completeResponse){
+                $this.completeTaskAsyncCallback(completeResponse); //multiply task editor support
+            },
+            failure: function(errMsg) {
+                toppanel.showErrorPanelAsync(errMsg, 5000);
+            }
+        });
+    },
+
+
+    completeTaskAsyncCallback: function(completeResponse)
+    {
+        if (completeResponse != true)
+            return toppanel.showErrorPanelAsync(this.errors.UnknownError, 4000);
+
+        var task = copyeditor.getCurrentTask();
+
+        //disable task button when task solved
+        //$("#" + task.button).prop( {disabled: true});
+        $(task.button).prop( {disabled: true});
+
+        //update money
+        controller.updateUserProfileAsync();
+    },
+
+    errors: {
+        Success: "Everything is fine!",
+        AuthorizationError: "Authorization error",
+        RequestTimeout: "The program was running to long",
+        ServerUnavailable: "Server is unavailable :(",
+        ApiVersionMismatch: "Server API mismatch",
+
+        UnknownUser: "Such user not found",
+        UnknownTask: "Such task not found",
+        TaskSolved: "This task is already solved ",
+        TaskUnavailable: "This task is not available to you",
+        AccessDenied: "Access denied",
+        UnknownError: "Unknown error"
+    }
+};
+
+
+window.share = {
+
+    data:
+    {
+        VK: {
+            isInitialized: false,
+            isUserLoggedIn: false,
+            sessionId:null,
+            userId:null
+        },
+
+        userLevel1: {
+            header: "Поздравляем с достижением первого уровня!",
+            imageSrc: "images/badges/share-level-01.jpg",
+            vkMessage: "Путь в тысячу миль начинается с одного шага. Сегодня я достиг 1-го уровня на [javarush|JavaRush]. Осталось еще 39, и я стану Java-программистом  =)",
+            vkImage: "photo185700601_337298090"
+        },
+        userLevel2: {
+            header: "Поздравляем с достижением второго уровня!",
+            imageSrc: "images/badges/share-level-02.jpg",
+            vkMessage: "Чтобы стать программистом - нужно много практиковаться. Этим и занимаюсь - сегодня достиг 2-го уровня на [javarush|JavaRush].",
+            vkImage: "photo185700601_337662765"
+        },
+        userLevel3: {
+            header: "Поздравляем с достижением третьего уровня!",
+            imageSrc: "images/badges/share-level-03.jpg",
+            vkMessage: "Я достиг 3-го уровня на JavaRush! Постепенно становится всё интереснее. Всем рекомендую: http://vk.com/javarush",
+            vkImage: "photo185700601_337662768"
+        },
+
+        userLevel4: {
+            vkMessage: "Оказывается, что Intellij IDEA Community Edition это не 4 разных человека, а интегрированная среда разработки. Люблю ее. Продолжаю учить Java на [javarush|JavaRush].",
+            vkImage: "photo185700601_339754298"
+        },
+        userLevel5: {
+            vkMessage: "Учусь на программиста. Если кому-то надо перставить винду, скачать фильм, починить тостер или утюг, просьба не обращаться!",
+            vkImage: "photo185700601_339754301"
+        },
+        userLevel6: {
+            vkMessage: "Я достиг 6-го уровня на [javarush|JavaRush]. Умнею на глазах - даже лоб стал шире =) Всем рекомендую: http://javarush.ru/",
+            vkImage: "photo185700601_339754302"
+        },
+        userLevel7: {
+            vkMessage: "Даже не думал, что изучение программирования может быть таким интересным. Уже на 7-м уровне [javarush|JavaRush]!",
+            vkImage: "photo185700601_339754303"
+        },
+        userLevel8: {
+            vkMessage: "Я достиг 8-го уровня на [javarush|JavaRush]. Теперь знаю массивы, ArrayList, Generics и много других страшных слов.",
+            vkImage: "photo185700601_339754305"
+        },
+        userLevel9: {
+            vkMessage: "Достиг 9-го уровня на [javarush|JavaRush]. Начинает расти свитер и борода =)",
+            vkImage: "photo185700601_339754307"
+        },
+        userLevel10: {
+            vkMessage: "Сегодня я достиг 10-го уровня на [javarush|JavaRush]. Я уже на половину половины Java-программист =) Осталось всего 30 уровней.",
+            vkImage: "photo185700601_339754308"
+        },
+        userLevel11: {
+            vkMessage: "Большие программы никогда не пишутся в одиночку. Для этого нужна хорошая команда. Предлагаю проходить уровни на [javarush|JavaRush] вместе. Присоединяйтесь: http://javarush.ru/.",
+            vkImage: "photo185700601_339754309"
+        },
+        userLevel12: {
+            vkMessage: "Узнал какие зарплаты получают программисты - начал заниматься на [javarush|JavaRush] еще и по ночам =)",
+            vkImage: "photo185700601_339754310"
+        },
+        userLevel13: {
+            vkMessage: "А я уже знаю основы объектно-ориентированного программирования. Перешел на 13-й уровень [javarush|JavaRush]. А вы всё сидите на пляже и пьете пиво... лузеры))",
+            vkImage: "photo185700601_339754312"
+        },
+        userLevel14: {
+            vkMessage: "Перешел на 14-й уровень. Понял, что [javarush|JavaRush] - это лучший сайт в мире. Нет! Даже лучше! http://javarush.ru/.",
+            vkImage: "photo185700601_339754314"
+        },
+        userLevel15: {
+            vkMessage: "Перешел на 15-й уровень [javarush|JavaRush]. Это небольшой шаг для меня, но большой для человечества))) Скоро все об этом узнают =)",
+            vkImage: "photo185700601_339754317"
+        },
+        userLevel16: {
+            vkMessage: "Я уже на 16-м уровне [javarush|JavaRush]. Все легкие темы позади. Теперь переходим к многопоточности!",
+            vkImage: "photo185700601_339754318"
+        },
+        userLevel17: {
+            vkMessage: "Перешел на 17 уровень [javarush|JavaRush]. Всем рекомендую: http://vk.com/javarush",
+            vkImage: "photo185700601_339754319"
+        },
+        userLevel18: {
+            vkMessage: "Перешел на 18 уровень [javarush|JavaRush]. Всем рекомендую: http://vk.com/javarush",
+            vkImage: "photo185700601_339754322"
+        },
+        userLevel19: {
+            vkMessage: "Перешел на 19 уровень [javarush|JavaRush]. Всем рекомендую: http://vk.com/javarush",
+            vkImage: "photo185700601_339754323"
+        },
+        userLevel20: {
+            vkMessage: "Перешел на 20 уровень [javarush|JavaRush]. Всем рекомендую: http://vk.com/javarush",
+            vkImage: "photo185700601_339754328"
+        },
+        userLevel21: {
+            vkMessage: "Перешел на 21 уровень [javarush|JavaRush]. Всем рекомендую: http://vk.com/javarush",
+            vkImage: "photo185700601_339754329"
+        },
+        userLevel22: {
+            vkMessage: "22 уровнь [javarush|JavaRush]. Уже чувствую себя настоящим программистом. Начал понимать IT-шный юмор. Присоединяйтесь: http://javarush.ru/",
+            vkImage: "photo185700601_339754332"
+        },
+        userLevel23: {
+            vkMessage: "Перешел на 23 уровень [javarush|JavaRush]. Всем рекомендую: http://vk.com/javarush",
+            vkImage: "photo185700601_339754335"
+        },
+        userLevel24: {
+            vkMessage: "Перешел на 24 уровень [javarush|JavaRush]. Всем рекомендую: http://vk.com/javarush",
+            vkImage: "photo185700601_339754336"
+        },
+        userLevel25: {
+            vkMessage: "Перешел на 25 уровень [javarush|JavaRush]. Всем рекомендую: http://vk.com/javarush",
+            vkImage: "photo185700601_339754342"
+        },
+        userLevel26: {
+            vkMessage: "Перешел на 26 уровень [javarush|JavaRush]. Всем рекомендую: http://vk.com/javarush",
+            vkImage: "photo185700601_339754347"
+        },
+        userLevel27: {
+            vkMessage: "Перешел на 27 уровень [javarush|JavaRush]. Всем рекомендую: http://vk.com/javarush",
+            vkImage: "photo185700601_339754354"
+        },
+        userLevel28: {
+            vkMessage: "Перешел на 28 уровень [javarush|JavaRush]. Всем рекомендую: http://vk.com/javarush",
+            vkImage: "photo185700601_339754358"
+        },
+        userLevel29: {
+            vkMessage: "Перешел на 29 уровень [javarush|JavaRush]. Всем рекомендую: http://vk.com/javarush",
+            vkImage: "photo185700601_339754361"
+        },
+        userLevel30: {
+            vkMessage: "Перешел на 30 уровень [javarush|JavaRush]. Всем рекомендую: http://vk.com/javarush",
+            vkImage: "photo185700601_339754363"
+        },
+        userLevel31: {
+            vkMessage: "Перешел на 31 уровень [javarush|JavaRush]. Всем рекомендую: http://vk.com/javarush",
+            vkImage: "photo185700601_339754366"
+        },
+        userLevel32: {
+            vkMessage: "Перешел на 32 уровень [javarush|JavaRush]. Всем рекомендую: http://vk.com/javarush",
+            vkImage: "photo185700601_339754378"
+        },
+        userLevel33: {
+            vkMessage: "Перешел на 33 уровень [javarush|JavaRush]. Всем рекомендую: http://vk.com/javarush",
+            vkImage: "photo185700601_339754385"
+        },
+        userLevel34: {
+            vkMessage: "Перешел на 34 уровень [javarush|JavaRush]. Всем рекомендую: http://vk.com/javarush",
+            vkImage: "photo185700601_339754389"
+        },
+        userLevel35: {
+            vkMessage: "Перешел на 35 уровень [javarush|JavaRush]. Всем рекомендую: http://vk.com/javarush",
+            vkImage: "photo185700601_339754391"
+        },
+        userLevel36: {
+            vkMessage: "Перешел на 36 уровень [javarush|JavaRush]. Всем рекомендую: http://vk.com/javarush",
+            vkImage: "photo185700601_339754396"
+        },
+        userLevel37: {
+            vkMessage: "Перешел на 37 уровень [javarush|JavaRush]. Всем рекомендую: http://vk.com/javarush",
+            vkImage: "photo185700601_339754400"
+        },
+        userLevel38: {
+            vkMessage: "Перешел на 38 уровень [javarush|JavaRush]. Всем рекомендую: http://vk.com/javarush",
+            vkImage: "photo185700601_339754404"
+        },
+        userLevel39: {
+            vkMessage: "Перешел на 39 уровень [javarush|JavaRush]. Всем рекомендую: http://vk.com/javarush",
+            vkImage: "photo185700601_339754408"
+        },
+        userLevel40: {
+            vkMessage: "Перешел на 40 уровень [javarush|JavaRush]. Всем рекомендую: http://vk.com/javarush",
+            vkImage: "photo185700601_339754415"
+        },
+        userLevel41: {
+            vkMessage: "Я прошел весь курс Java Core на [javarush|JavaRush]!",
+            vkImage: "photo185700601_339754421"
+        }
+    },
+
+    initializeAsync:function()
+    {
+        $("#share-dialog").load("share-dialog.html", function () {
+            if (share.checkLevel())
+                share.initialize();
+        });
+    },
+
+    //header: "Поздравляем с достижением третьего уровня!",
+    //imageSrc: "",
+    initialize: function () {
+        var level = controller.context.userLevel;
+        var key = "userLevel" + level;
+
+        var dialogTitle = share.data[key].header;
+        if (dialogTitle == null) dialogTitle = "Поздравляем с достижением нового уровня!"
+
+        var strLevel = level < 10 ? "0" + level : "" + level;
+        var imageSrc = "/levels/images/badges/share-level-" + strLevel + ".jpg";
+
+        $('#dialog-header').html(dialogTitle);
+        $('#dialog-image').attr("src", imageSrc);
+    },
+
+    showAsync: function () {
+        if (this.checkLevel())
+            $('#share-dialog').modal('show');
+    },
+
+    checkLevel: function () {
+        //return (controller.context.userLevel == 1 || controller.context.userLevel == 2 || controller.context.userLevel == 3) && controller.context.userLesson == 0;
+        return (controller.context.userLevel > 0) && (controller.context.userLesson == 0) && (controller.context.userLevel == controller.context.uiLevel);
+    },
+
+    postOnWall: function () {
+        var $this = this;
+        var level = controller.context.userLevel;
+        var key = "userLevel" + level;
+        VK.Api.call('wall.post', {message: share.data[key].vkMessage, attachments: share.data[key].vkImage}, function (r) {
+            if (r.response) {
+                $this.hide();
+            }
+        });
+    },
+
+    hide: function () {
+        $('#share-dialog').modal('hide');
+    },
+
+    initializeVK: function()
+    {
+        if (window.VK)
+            VK.init({ apiId: 3167756 });
+    },
+
+    checkVK: function () {
+        share.data.VK.isInitialized = (window.VK != null);
+        if (!share.data.VK.isInitialized) return;
+
+        VK.Auth.getLoginStatus(function (response) {
+            if (response.session) {
+                share.data.VK.isUserLoggedIn = true;
+                share.data.VK.sessionId = response.session.sid;
+                share.data.VK.userId = response.session.mid;
+            } else {
+                share.data.VK.isUserLoggedIn = true;
+                share.data.VK.sessionId = null;
+                share.data.VK.userId = null;
+            }
+        });
+    }
+};
+
+window.PageMenu =
+{
+    initializeAsync: function () {
+        PageMenu.initialize(controller.context.userLevel);
+    },
+
+    initialize: function (level) {
+        var html = "";
+        if (level == 0) {
+            html = "";
+        }
+        else {
+            html = '<br>Доступные уровни:&nbsp;&nbsp;&nbsp;';
+            var len = level > 20 ? 20 : level;
+            for (var i = 0; i <= len; i++) {
+                var strLevel = i < 10 ? ("0" + i) : ("" + i);
+                html += '<a href="level' + strLevel + '.html">' + i + '</a>&nbsp;&nbsp;';
+            }
+            html += '<br>';
+
+            if (level > 20) {
+                for (var i = 21; i <= level; i++) {
+                    html += '<a href="level' + i + '.html">' + i + '</a>&nbsp;&nbsp;';
+                }
+                html += '<br>';
+            }
+        }
+
+        $("div.level-ref").html(html);
+    }
+};
+
+
+window.social = {
+
+    data:{
+        cookieKey: "javarush.social.dialog"
+    },
+
+    initializeAsync: function () {
+        $("#social-dialog").load("social-dialog.html", function () {
+            if (social.checkLevel())
+                social.initialize();
+        });
+    },
+
+    initialize: function () {
+        //show dialog every 2 days
+        var socialInfo = $.cookie(social.data.cookieKey);
+        if (socialInfo != null)
+            return;
+
+        $.cookie(social.data.cookieKey, "true", {path: '/', expires: 2}); //2 days
+        //$.cookie(social.data.cookieKey, "true", {path: '/', expires: new Date(new Date().getTime() + 120000)}); //2 min
+
+        //get social user list for current user
+        $.ajax({
+            type: "GET",
+            url: "/api/rest/user/social/all.json?sessionId=" + controller.context.sessionId,
+            data: "",
+            success: function (socialList) {
+                //show window only when social list is empty
+                if (socialList.length == 0)
+                {
+                    setTimeout(function () {
+                        social.showAsync();
+                    }, 1000);
+                }
+            }
+        });
+    },
+
+    checkLevel: function () {
+        return (controller.context.userLevel > 1) && (controller.context.userLesson > 0) && (controller.context.userLevel == controller.context.uiLevel);
+    },
+
+    showAsync: function () {
+        if (this.checkLevel())
+        {
+            //$('#social-dialog > #dialog-header').html("Ho-Ho-Ho!");
+            $('#social-dialog').modal('show');
+        }
+
+    }
+};
+
+
+window.NewSubscription = {
+
+    data: {
+        cookieKey: "javarush.subscription.key",
+        prices: {
+           "MONTH_11_40":              30.00,
+           "PREMIUM_UNLIMITED":       200.00,
+           "PREMIUM_INTERNSHIP":      300.00,
+           "PREMIUM_INTERNSHIP_PLUS": 350.00,
+           "PREMIUM_MENTOR_PLUS":     450.00
+        }
+    },
+
+    initializeAsync: function () {
+        setTimeout(function () {
+            NewSubscription.initialize();
+        }, 2000);
+    },
+
+    initialize: function () {
+
+        //get new subscription list for current user
+        $.ajax({
+            type: "GET",
+            url: "/api/rest/user/subscription/new.json?sessionId=" + controller.context.sessionId,
+            data: "",
+            success: function (subscriptionlList) {
+                //show window only when social list is not empty
+                if (subscriptionlList.length == 0) return;
+                var subInfo = subscriptionlList.pop();
+                var newSubscriptionKey = "" + subInfo.id;
+
+                var subscriptionKey = $.cookie(NewSubscription.data.cookieKey);
+                if (subscriptionKey != newSubscriptionKey) {
+                    $.cookie(NewSubscription.data.cookieKey, newSubscriptionKey, {path: '/', expires: 2}); //2 days
+                    NewSubscription.showAsync();
+
+                    //send message to GA
+                    var price = NewSubscription.data.prices[subInfo.type];
+                    if (price == null) return;
+
+                    NewSubscription.sendPriceConversionAsync(price);
+                    //NewSubscription.sendGoogleAnalyticEcomerceInfoAsync(subInfo.id, subInfo.type, price);
+                }
+
+            }
+        });
+    },
+
+    showAsync: function () {
+        $("#subscription-dialog").load("subscription-dialog.html", function () {
+            $('#subscription-dialog').modal('show');
+        });
+    },
+
+    sendPriceConversionAsync:function(price){
+        /* <![CDATA[ */
+        goog_snippet_vars = function() {
+            var w = window;
+            w.google_conversion_id = 935770819;
+            w.google_conversion_label = "UGi_CLKgiGQQw_WavgM";
+            w.google_conversion_value = price;
+            w.google_conversion_currency = "USD";
+            w.google_remarketing_only = false;
+        }
+        // DO NOT CHANGE THE CODE BELOW.
+        goog_report_conversion = function(url) {
+            goog_snippet_vars();
+            window.google_conversion_format = "3";
+            var opt = new Object();
+            opt.onload_callback = function() {
+                if (typeof(url) != 'undefined') {
+                    window.location = url;
+                }
+            }
+            var conv_handler = window['google_trackConversion'];
+            if (typeof(conv_handler) == 'function') {
+                conv_handler(opt);
+            }
+        }
+        /* ]]> */
+
+        goog_report_conversion();
+    },
+
+    sendGoogleAnalyticEcomerceInfoAsync: function (subscriptionID, subscriptionType, subscriptionPrice) {
+        ga('ecommerce:addTransaction', {
+            'id': subscriptionID,                           // Transaction ID. Required.
+            'revenue': subscriptionPrice,                   // Grand Total.
+        });
+
+        ga('ecommerce:addItem', {
+            'id': subscriptionID,                           // Transaction ID. Required.
+            'name': subscriptionType,                       // Product name. Required.
+            'sku': subscriptionType,                        // SKU/code.
+            'category': controller.context.userLevel,       // Category or variation.
+            'price': subscriptionPrice,                     // Unit price.
+            'quantity': '1'                                 // Quantity.
+        });
+
+        ga('ecommerce:send');
+    }
+};

@@ -1,0 +1,2264 @@
+<!DOCTYPE html>
+<!-- saved from url=(0038)http://javarush.ru/levels/level17.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta property="fb:app_id" content="163275303873171">
+
+    <link rel="stylesheet" type="text/css" href="./main.css">
+    <link rel="stylesheet" type="text/css" href="./common.css">
+    <link rel="stylesheet" type="text/css" href="./table-task.css">
+    <link rel="stylesheet" type="text/css" href="./table-example.css">
+    <link rel="stylesheet" type="text/css" href="./prettify.css">
+    <link rel="stylesheet" type="text/css" href="./legacy.css">
+
+    <title> JavaRush | Уровень 17</title>
+
+    <link rel="apple-touch-icon" href="http://javarush.ru/images/apple-touch-icon_142x142.png" type="image/png">
+    <link rel="shortcut icon" href="http://javarush.ru/images/javarush.ico" type="image/ico">
+
+    <!--VK API-->
+    <script type="text/javascript" async="" src="./ecommerce.js.Без названия"></script><script type="text/javascript" async="" src="./watch.js.Без названия"></script><script async="" src="./fbds.js.Без названия"></script><script async="" src="./s(1)"></script><script async="" src="./analytics.js.Без названия"></script><script src="./openapi.js.Без названия"></script>
+    <script src="./share.js.Без названия" charset="windows-1251"></script>
+
+    <!--jQuery-->
+    <script src="./jquery-2.1.4.js.Без названия"></script>
+    <script src="./jquery.cookie.js.Без названия"></script>
+    <script src="./jquery.scrolldepth.min.js.Без названия"></script>
+
+    <!--Page Scripts-->
+    <script src="./statistics.js.jsp"></script>
+    <script src="./common.js.Без названия"></script>
+
+    <!--ACE editor-->
+    <script src="./ace.js.Без названия" charset="utf-8"></script><style id="ace_editor.css">.ace_editor {position: relative;overflow: hidden;font: 12px/normal 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;direction: ltr;}.ace_scroller {position: absolute;overflow: hidden;top: 0;bottom: 0;background-color: inherit;-ms-user-select: none;-moz-user-select: none;-webkit-user-select: none;user-select: none;cursor: text;}.ace_content {position: absolute;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;min-width: 100%;}.ace_dragging .ace_scroller:before{position: absolute;top: 0;left: 0;right: 0;bottom: 0;content: '';background: rgba(250, 250, 250, 0.01);z-index: 1000;}.ace_dragging.ace_dark .ace_scroller:before{background: rgba(0, 0, 0, 0.01);}.ace_selecting, .ace_selecting * {cursor: text !important;}.ace_gutter {position: absolute;overflow : hidden;width: auto;top: 0;bottom: 0;left: 0;cursor: default;z-index: 4;-ms-user-select: none;-moz-user-select: none;-webkit-user-select: none;user-select: none;}.ace_gutter-active-line {position: absolute;left: 0;right: 0;}.ace_scroller.ace_scroll-left {box-shadow: 17px 0 16px -16px rgba(0, 0, 0, 0.4) inset;}.ace_gutter-cell {padding-left: 19px;padding-right: 6px;background-repeat: no-repeat;}.ace_gutter-cell.ace_error {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAABOFBMVEX/////////QRswFAb/Ui4wFAYwFAYwFAaWGAfDRymzOSH/PxswFAb/SiUwFAYwFAbUPRvjQiDllog5HhHdRybsTi3/Tyv9Tir+Syj/UC3////XurebMBIwFAb/RSHbPx/gUzfdwL3kzMivKBAwFAbbvbnhPx66NhowFAYwFAaZJg8wFAaxKBDZurf/RB6mMxb/SCMwFAYwFAbxQB3+RB4wFAb/Qhy4Oh+4QifbNRcwFAYwFAYwFAb/QRzdNhgwFAYwFAbav7v/Uy7oaE68MBK5LxLewr/r2NXewLswFAaxJw4wFAbkPRy2PyYwFAaxKhLm1tMwFAazPiQwFAaUGAb/QBrfOx3bvrv/VC/maE4wFAbRPBq6MRO8Qynew8Dp2tjfwb0wFAbx6eju5+by6uns4uH9/f36+vr/GkHjAAAAYnRSTlMAGt+64rnWu/bo8eAA4InH3+DwoN7j4eLi4xP99Nfg4+b+/u9B/eDs1MD1mO7+4PHg2MXa347g7vDizMLN4eG+Pv7i5evs/v79yu7S3/DV7/498Yv24eH+4ufQ3Ozu/v7+y13sRqwAAADLSURBVHjaZc/XDsFgGIBhtDrshlitmk2IrbHFqL2pvXf/+78DPokj7+Fz9qpU/9UXJIlhmPaTaQ6QPaz0mm+5gwkgovcV6GZzd5JtCQwgsxoHOvJO15kleRLAnMgHFIESUEPmawB9ngmelTtipwwfASilxOLyiV5UVUyVAfbG0cCPHig+GBkzAENHS0AstVF6bacZIOzgLmxsHbt2OecNgJC83JERmePUYq8ARGkJx6XtFsdddBQgZE2nPR6CICZhawjA4Fb/chv+399kfR+MMMDGOQAAAABJRU5ErkJggg==");background-repeat: no-repeat;background-position: 2px center;}.ace_gutter-cell.ace_warning {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAmVBMVEX///8AAAD///8AAAAAAABPSzb/5sAAAAB/blH/73z/ulkAAAAAAAD85pkAAAAAAAACAgP/vGz/rkDerGbGrV7/pkQICAf////e0IsAAAD/oED/qTvhrnUAAAD/yHD/njcAAADuv2r/nz//oTj/p064oGf/zHAAAAA9Nir/tFIAAAD/tlTiuWf/tkIAAACynXEAAAAAAAAtIRW7zBpBAAAAM3RSTlMAABR1m7RXO8Ln31Z36zT+neXe5OzooRDfn+TZ4p3h2hTf4t3k3ucyrN1K5+Xaks52Sfs9CXgrAAAAjklEQVR42o3PbQ+CIBQFYEwboPhSYgoYunIqqLn6/z8uYdH8Vmdnu9vz4WwXgN/xTPRD2+sgOcZjsge/whXZgUaYYvT8QnuJaUrjrHUQreGczuEafQCO/SJTufTbroWsPgsllVhq3wJEk2jUSzX3CUEDJC84707djRc5MTAQxoLgupWRwW6UB5fS++NV8AbOZgnsC7BpEAAAAABJRU5ErkJggg==");background-position: 2px center;}.ace_gutter-cell.ace_info {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAAAAAA6mKC9AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAJ0Uk5TAAB2k804AAAAPklEQVQY02NgIB68QuO3tiLznjAwpKTgNyDbMegwisCHZUETUZV0ZqOquBpXj2rtnpSJT1AEnnRmL2OgGgAAIKkRQap2htgAAAAASUVORK5CYII=");background-position: 2px center;}.ace_dark .ace_gutter-cell.ace_info {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAJFBMVEUAAAChoaGAgIAqKiq+vr6tra1ZWVmUlJSbm5s8PDxubm56enrdgzg3AAAAAXRSTlMAQObYZgAAAClJREFUeNpjYMAPdsMYHegyJZFQBlsUlMFVCWUYKkAZMxZAGdxlDMQBAG+TBP4B6RyJAAAAAElFTkSuQmCC");}.ace_scrollbar {position: absolute;right: 0;bottom: 0;z-index: 6;}.ace_scrollbar-inner {position: absolute;cursor: text;left: 0;top: 0;}.ace_scrollbar-v{overflow-x: hidden;overflow-y: scroll;top: 0;}.ace_scrollbar-h {overflow-x: scroll;overflow-y: hidden;left: 0;}.ace_print-margin {position: absolute;height: 100%;}.ace_text-input {position: absolute;z-index: 0;width: 0.5em;height: 1em;opacity: 0;background: transparent;-moz-appearance: none;appearance: none;border: none;resize: none;outline: none;overflow: hidden;font: inherit;padding: 0 1px;margin: 0 -1px;text-indent: -1em;-ms-user-select: text;-moz-user-select: text;-webkit-user-select: text;user-select: text;white-space: pre!important;}.ace_text-input.ace_composition {background: inherit;color: inherit;z-index: 1000;opacity: 1;text-indent: 0;}.ace_layer {z-index: 1;position: absolute;overflow: hidden;word-wrap: normal;white-space: pre;height: 100%;width: 100%;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;pointer-events: none;}.ace_gutter-layer {position: relative;width: auto;text-align: right;pointer-events: auto;}.ace_text-layer {font: inherit !important;}.ace_cjk {display: inline-block;text-align: center;}.ace_cursor-layer {z-index: 4;}.ace_cursor {z-index: 4;position: absolute;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;border-left: 2px solid;transform: translatez(0);}.ace_slim-cursors .ace_cursor {border-left-width: 1px;}.ace_overwrite-cursors .ace_cursor {border-left-width: 0;border-bottom: 1px solid;}.ace_hidden-cursors .ace_cursor {opacity: 0.2;}.ace_smooth-blinking .ace_cursor {-webkit-transition: opacity 0.18s;transition: opacity 0.18s;}.ace_editor.ace_multiselect .ace_cursor {border-left-width: 1px;}.ace_marker-layer .ace_step, .ace_marker-layer .ace_stack {position: absolute;z-index: 3;}.ace_marker-layer .ace_selection {position: absolute;z-index: 5;}.ace_marker-layer .ace_bracket {position: absolute;z-index: 6;}.ace_marker-layer .ace_active-line {position: absolute;z-index: 2;}.ace_marker-layer .ace_selected-word {position: absolute;z-index: 4;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;}.ace_line .ace_fold {-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;display: inline-block;height: 11px;margin-top: -2px;vertical-align: middle;background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAJCAYAAADU6McMAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAJpJREFUeNpi/P//PwOlgAXGYGRklAVSokD8GmjwY1wasKljQpYACtpCFeADcHVQfQyMQAwzwAZI3wJKvCLkfKBaMSClBlR7BOQikCFGQEErIH0VqkabiGCAqwUadAzZJRxQr/0gwiXIal8zQQPnNVTgJ1TdawL0T5gBIP1MUJNhBv2HKoQHHjqNrA4WO4zY0glyNKLT2KIfIMAAQsdgGiXvgnYAAAAASUVORK5CYII="),url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAA3CAYAAADNNiA5AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAACJJREFUeNpi+P//fxgTAwPDBxDxD078RSX+YeEyDFMCIMAAI3INmXiwf2YAAAAASUVORK5CYII=");background-repeat: no-repeat, repeat-x;background-position: center center, top left;color: transparent;border: 1px solid black;border-radius: 2px;cursor: pointer;pointer-events: auto;}.ace_dark .ace_fold {}.ace_fold:hover{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAJCAYAAADU6McMAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAJpJREFUeNpi/P//PwOlgAXGYGRklAVSokD8GmjwY1wasKljQpYACtpCFeADcHVQfQyMQAwzwAZI3wJKvCLkfKBaMSClBlR7BOQikCFGQEErIH0VqkabiGCAqwUadAzZJRxQr/0gwiXIal8zQQPnNVTgJ1TdawL0T5gBIP1MUJNhBv2HKoQHHjqNrA4WO4zY0glyNKLT2KIfIMAAQsdgGiXvgnYAAAAASUVORK5CYII="),url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAA3CAYAAADNNiA5AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAACBJREFUeNpi+P//fz4TAwPDZxDxD5X4i5fLMEwJgAADAEPVDbjNw87ZAAAAAElFTkSuQmCC");}.ace_tooltip {background-color: #FFF;background-image: -webkit-linear-gradient(top, transparent, rgba(0, 0, 0, 0.1));background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.1));border: 1px solid gray;border-radius: 1px;box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);color: black;max-width: 100%;padding: 3px 4px;position: fixed;z-index: 999999;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;cursor: default;white-space: pre;word-wrap: break-word;line-height: normal;font-style: normal;font-weight: normal;letter-spacing: normal;pointer-events: none;}.ace_folding-enabled > .ace_gutter-cell {padding-right: 13px;}.ace_fold-widget {-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;margin: 0 -12px 0 1px;display: none;width: 11px;vertical-align: top;background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAANElEQVR42mWKsQ0AMAzC8ixLlrzQjzmBiEjp0A6WwBCSPgKAXoLkqSot7nN3yMwR7pZ32NzpKkVoDBUxKAAAAABJRU5ErkJggg==");background-repeat: no-repeat;background-position: center;border-radius: 3px;border: 1px solid transparent;cursor: pointer;}.ace_folding-enabled .ace_fold-widget {display: inline-block;   }.ace_fold-widget.ace_end {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAANElEQVR42m3HwQkAMAhD0YzsRchFKI7sAikeWkrxwScEB0nh5e7KTPWimZki4tYfVbX+MNl4pyZXejUO1QAAAABJRU5ErkJggg==");}.ace_fold-widget.ace_closed {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAGCAYAAAAG5SQMAAAAOUlEQVR42jXKwQkAMAgDwKwqKD4EwQ26sSOkVWjgIIHAzPiCgaqiqnJHZnKICBERHN194O5b9vbLuAVRL+l0YWnZAAAAAElFTkSuQmCCXA==");}.ace_fold-widget:hover {border: 1px solid rgba(0, 0, 0, 0.3);background-color: rgba(255, 255, 255, 0.2);box-shadow: 0 1px 1px rgba(255, 255, 255, 0.7);}.ace_fold-widget:active {border: 1px solid rgba(0, 0, 0, 0.4);background-color: rgba(0, 0, 0, 0.05);box-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);}.ace_dark .ace_fold-widget {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHklEQVQIW2P4//8/AzoGEQ7oGCaLLAhWiSwB146BAQCSTPYocqT0AAAAAElFTkSuQmCC");}.ace_dark .ace_fold-widget.ace_end {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAH0lEQVQIW2P4//8/AxQ7wNjIAjDMgC4AxjCVKBirIAAF0kz2rlhxpAAAAABJRU5ErkJggg==");}.ace_dark .ace_fold-widget.ace_closed {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAFCAYAAACAcVaiAAAAHElEQVQIW2P4//+/AxAzgDADlOOAznHAKgPWAwARji8UIDTfQQAAAABJRU5ErkJggg==");}.ace_dark .ace_fold-widget:hover {box-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);background-color: rgba(255, 255, 255, 0.1);}.ace_dark .ace_fold-widget:active {box-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);}.ace_fold-widget.ace_invalid {background-color: #FFB4B4;border-color: #DE5555;}.ace_fade-fold-widgets .ace_fold-widget {-webkit-transition: opacity 0.4s ease 0.05s;transition: opacity 0.4s ease 0.05s;opacity: 0;}.ace_fade-fold-widgets:hover .ace_fold-widget {-webkit-transition: opacity 0.05s ease 0.05s;transition: opacity 0.05s ease 0.05s;opacity:1;}.ace_underline {text-decoration: underline;}.ace_bold {font-weight: bold;}.ace_nobold .ace_bold {font-weight: normal;}.ace_italic {font-style: italic;}.ace_error-marker {background-color: rgba(255, 0, 0,0.2);position: absolute;z-index: 9;}.ace_highlight-marker {background-color: rgba(255, 255, 0,0.2);position: absolute;z-index: 8;}.ace_br1 {border-top-left-radius    : 3px;}.ace_br2 {border-top-right-radius   : 3px;}.ace_br3 {border-top-left-radius    : 3px; border-top-right-radius:    3px;}.ace_br4 {border-bottom-right-radius: 3px;}.ace_br5 {border-top-left-radius    : 3px; border-bottom-right-radius: 3px;}.ace_br6 {border-top-right-radius   : 3px; border-bottom-right-radius: 3px;}.ace_br7 {border-top-left-radius    : 3px; border-top-right-radius:    3px; border-bottom-right-radius: 3px;}.ace_br8 {border-bottom-left-radius : 3px;}.ace_br9 {border-top-left-radius    : 3px; border-bottom-left-radius:  3px;}.ace_br10{border-top-right-radius   : 3px; border-bottom-left-radius:  3px;}.ace_br11{border-top-left-radius    : 3px; border-top-right-radius:    3px; border-bottom-left-radius:  3px;}.ace_br12{border-bottom-right-radius: 3px; border-bottom-left-radius:  3px;}.ace_br13{border-top-left-radius    : 3px; border-bottom-right-radius: 3px; border-bottom-left-radius:  3px;}.ace_br14{border-top-right-radius   : 3px; border-bottom-right-radius: 3px; border-bottom-left-radius:  3px;}.ace_br15{border-top-left-radius    : 3px; border-top-right-radius:    3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px;}
+/*# sourceURL=ace/css/ace_editor.css */</style><style id="ace-tm">.ace-tm .ace_gutter {background: #f0f0f0;color: #333;}.ace-tm .ace_print-margin {width: 1px;background: #e8e8e8;}.ace-tm .ace_fold {background-color: #6B72E6;}.ace-tm {background-color: #FFFFFF;color: black;}.ace-tm .ace_cursor {color: black;}.ace-tm .ace_invisible {color: rgb(191, 191, 191);}.ace-tm .ace_storage,.ace-tm .ace_keyword {color: blue;}.ace-tm .ace_constant {color: rgb(197, 6, 11);}.ace-tm .ace_constant.ace_buildin {color: rgb(88, 72, 246);}.ace-tm .ace_constant.ace_language {color: rgb(88, 92, 246);}.ace-tm .ace_constant.ace_library {color: rgb(6, 150, 14);}.ace-tm .ace_invalid {background-color: rgba(255, 0, 0, 0.1);color: red;}.ace-tm .ace_support.ace_function {color: rgb(60, 76, 114);}.ace-tm .ace_support.ace_constant {color: rgb(6, 150, 14);}.ace-tm .ace_support.ace_type,.ace-tm .ace_support.ace_class {color: rgb(109, 121, 222);}.ace-tm .ace_keyword.ace_operator {color: rgb(104, 118, 135);}.ace-tm .ace_string {color: rgb(3, 106, 7);}.ace-tm .ace_comment {color: rgb(76, 136, 107);}.ace-tm .ace_comment.ace_doc {color: rgb(0, 102, 255);}.ace-tm .ace_comment.ace_doc.ace_tag {color: rgb(128, 159, 191);}.ace-tm .ace_constant.ace_numeric {color: rgb(0, 0, 205);}.ace-tm .ace_variable {color: rgb(49, 132, 149);}.ace-tm .ace_xml-pe {color: rgb(104, 104, 91);}.ace-tm .ace_entity.ace_name.ace_function {color: #0000A2;}.ace-tm .ace_heading {color: rgb(12, 7, 255);}.ace-tm .ace_list {color:rgb(185, 6, 144);}.ace-tm .ace_meta.ace_tag {color:rgb(0, 22, 142);}.ace-tm .ace_string.ace_regex {color: rgb(255, 0, 0)}.ace-tm .ace_marker-layer .ace_selection {background: rgb(181, 213, 255);}.ace-tm.ace_multiselect .ace_selection.ace_start {box-shadow: 0 0 3px 0px white;}.ace-tm .ace_marker-layer .ace_step {background: rgb(252, 255, 0);}.ace-tm .ace_marker-layer .ace_stack {background: rgb(164, 229, 101);}.ace-tm .ace_marker-layer .ace_bracket {margin: -1px 0 0 -1px;border: 1px solid rgb(192, 192, 192);}.ace-tm .ace_marker-layer .ace_active-line {background: rgba(0, 0, 0, 0.07);}.ace-tm .ace_gutter-active-line {background-color : #dcdcdc;}.ace-tm .ace_marker-layer .ace_selected-word {background: rgb(250, 250, 255);border: 1px solid rgb(200, 200, 250);}.ace-tm .ace_indent-guide {background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAE0lEQVQImWP4////f4bLly//BwAmVgd1/w11/gAAAABJRU5ErkJggg==") right repeat-y;}
+/*# sourceURL=ace/css/ace-tm */</style><style>    .error_widget_wrapper {        background: inherit;        color: inherit;        border:none    }    .error_widget {        border-top: solid 2px;        border-bottom: solid 2px;        margin: 5px 0;        padding: 10px 40px;        white-space: pre-wrap;    }    .error_widget.ace_error, .error_widget_arrow.ace_error{        border-color: #ff5a5a    }    .error_widget.ace_warning, .error_widget_arrow.ace_warning{        border-color: #F1D817    }    .error_widget.ace_info, .error_widget_arrow.ace_info{        border-color: #5a5a5a    }    .error_widget.ace_ok, .error_widget_arrow.ace_ok{        border-color: #5aaa5a    }    .error_widget_arrow {        position: absolute;        border: solid 5px;        border-top-color: transparent!important;        border-right-color: transparent!important;        border-left-color: transparent!important;        top: -5px;    }</style>
+    <script src="./mode-java.js.Без названия" charset="utf-8"></script>
+    <script src="./theme-github.js.Без названия" charset="utf-8"></script>
+    <script src="./ext-language_tools.js.Без названия" charset="utf-8"></script><style>.ace_snippet-marker {    -moz-box-sizing: border-box;    box-sizing: border-box;    background: rgba(194, 193, 208, 0.09);    border: 1px dotted rgba(211, 208, 235, 0.62);    position: absolute;}</style><style>.ace_editor.ace_autocomplete .ace_marker-layer .ace_active-line {    background-color: #CAD6FA;    z-index: 1;}.ace_editor.ace_autocomplete .ace_line-hover {    border: 1px solid #abbffe;    margin-top: -1px;    background: rgba(233,233,253,0.4);}.ace_editor.ace_autocomplete .ace_line-hover {    position: absolute;    z-index: 2;}.ace_editor.ace_autocomplete .ace_scroller {   background: none;   border: none;   box-shadow: none;}.ace_rightAlignedText {    color: gray;    display: inline-block;    position: absolute;    right: 4px;    text-align: right;    z-index: -1;}.ace_editor.ace_autocomplete .ace_completion-highlight{    color: #000;    text-shadow: 0 0 0.01em;}.ace_editor.ace_autocomplete {    width: 280px;    z-index: 200000;    background: #fbfbfb;    color: #444;    border: 1px lightgray solid;    position: fixed;    box-shadow: 2px 3px 5px rgba(0,0,0,.2);    line-height: 1.4;}</style>
+
+    <script src="./prettify.js.Без названия"></script><link rel="stylesheet" type="text/css" href="./prettify(1).css">
+    <script src="./dialogs-and-panels.js.Без названия" charset="utf-8"></script>
+    <script src="./levels.js.Без названия" charset="utf-8"></script>
+
+    <!--Facebook Analytics-->
+    <script>(function() {var _fbq = window._fbq || (window._fbq = []);if (!_fbq.loaded) {var fbds = document.createElement('script');fbds.async = true;fbds.src = '//connect.facebook.net/en_US/fbds.js';var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(fbds, s);_fbq.loaded = true;}_fbq.push(['addPixelId', '910397485679687']);})();window._fbq = window._fbq || [];window._fbq.push(['track', 'PixelInitialized', {}]);</script>
+    <noscript>&lt;img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?id=910397485679687&amp;amp;ev=PixelInitialized" /&gt;</noscript>
+<style id="ace-github">.ace-github .ace_gutter {background: #e8e8e8;color: #AAA;}.ace-github  {background: #fff;color: #000;}.ace-github .ace_keyword {font-weight: bold;}.ace-github .ace_string {color: #D14;}.ace-github .ace_variable.ace_class {color: teal;}.ace-github .ace_constant.ace_numeric {color: #099;}.ace-github .ace_constant.ace_buildin {color: #0086B3;}.ace-github .ace_support.ace_function {color: #0086B3;}.ace-github .ace_comment {color: #998;font-style: italic;}.ace-github .ace_variable.ace_language  {color: #0086B3;}.ace-github .ace_paren {font-weight: bold;}.ace-github .ace_boolean {font-weight: bold;}.ace-github .ace_string.ace_regexp {color: #009926;font-weight: normal;}.ace-github .ace_variable.ace_instance {color: teal;}.ace-github .ace_constant.ace_language {font-weight: bold;}.ace-github .ace_cursor {color: black;}.ace-github.ace_focus .ace_marker-layer .ace_active-line {background: rgb(255, 255, 204);}.ace-github .ace_marker-layer .ace_active-line {background: rgb(245, 245, 245);}.ace-github .ace_marker-layer .ace_selection {background: rgb(181, 213, 255);}.ace-github.ace_multiselect .ace_selection.ace_start {box-shadow: 0 0 3px 0px white;}.ace-github.ace_nobold .ace_line > span {font-weight: normal !important;}.ace-github .ace_marker-layer .ace_step {background: rgb(252, 255, 0);}.ace-github .ace_marker-layer .ace_stack {background: rgb(164, 229, 101);}.ace-github .ace_marker-layer .ace_bracket {margin: -1px 0 0 -1px;border: 1px solid rgb(192, 192, 192);}.ace-github .ace_gutter-active-line {background-color : rgba(0, 0, 0, 0.07);}.ace-github .ace_marker-layer .ace_selected-word {background: rgb(250, 250, 255);border: 1px solid rgb(200, 200, 250);}.ace-github .ace_invisible {color: #BFBFBF}.ace-github .ace_print-margin {width: 1px;background: #e8e8e8;}.ace-github .ace_indent-guide {background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAE0lEQVQImWP4////f4bLly//BwAmVgd1/w11/gAAAABJRU5ErkJggg==") right repeat-y;}
+/*# sourceURL=ace/css/ace-github */</style></head>
+<body><div id="vk_api_transport" style="position: absolute; top: -10000px;"></div>
+<!--Google Universal Analytics-->
+<!--<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-35679269-1', 'auto');ga('send', 'pageview');</script>-->
+
+<!--Page Header begin-->
+<div class="header">
+    <div class="header2">
+
+        <div class="header3">
+            <a href="http://javarush.ru/" target="_top"><div class="logo"></div></a>
+            <div class="header32">
+                <a href="http://javarush.ru/course.html"><div class="logo2"></div></a>
+            </div>
+
+            <div class="header-menu">
+                <ul class="header-menu" id="nav">
+
+                    <li id="menu-item-user-profile-nologin" class="menu-item" style="display: none;">
+                        <a href="http://javarush.ru/user/profile" target="_top">Моя страница</a>
+                    </li>
+
+                    <li id="menu-item-user-profile" class="menu-item has-sub" style="">
+                        <a id="pProfileLink" href="http://javarush.ru/user/profile" target="_top">Моя страница</a>
+                        <ul class="sub-menu">
+                            <li id="menu-item-profile" class="menu-item">
+                                <a href="http://javarush.ru/Profile.html#profile" target="_top">Моя страница</a>
+                                <span>•</span>
+                            </li>
+                            <li id="menu-item-messages" class="menu-item">
+                                <a href="http://javarush.ru/Profile.html#messages" target="_top">Сообщения</a>
+                                <span>•</span>
+                            </li>
+                            <li id="menu-item-friends" class="menu-item">
+                                <a href="http://javarush.ru/Profile.html#friends" target="_top">Друзья</a>
+                                <span>•</span>
+                            </li>
+                            <li id="menu-item-subscrioption" class="menu-item">
+                                <a href="http://javarush.ru/Profile.html#subscriptions" target="_top">Подписки</a>
+                                <span>•</span>
+                            </li>
+                            <li id="menu-item-exit" class="menu-item">
+                                <a href="http://javarush.ru/user/logout" target="_top">Выход</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li id="menu-item-course-java-nologin" class="menu-item current-menu-parent" style="display: none;">
+                        <a href="http://javarush.ru/user/course" target="_top">Курс Java</a>
+                    </li>
+
+                    <li id="menu-item-course-java" class="menu-item has-sub current-menu-parent" style="">
+                        <a id="pCourseLink" href="http://javarush.ru/user/course" target="_top">Курс Java</a>
+                        <ul class="sub-menu">
+                            <li id="menu-item-cource" class="menu-item current-menu-item">
+                                <a href="http://javarush.ru/user/course" target="_top">Курс Java</a>
+                                <span>•</span>
+                            </li>
+                            <li id="menu-item-task" class="menu-item">
+                                <a href="http://javarush.ru/user/course/task" target="_top">Задачи</a>
+                                <span>•</span>
+                            </li>
+                            <li id="menu-item-cource-plan" class="menu-item">
+                                <a href="http://info.javarush.ru/page/learning_plan/" target="_top">План обучения</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li id="menu-item-posts" class="menu-item has-sub">
+                        <a href="http://info.javarush.ru/" target="_top">Сообщество</a>
+                        <ul class="sub-menu">
+                            <li id="menu-item-info" class="menu-item">
+                                <a href="http://info.javarush.ru/" title="Сообщество" target="_top">Сообщество</a>
+                                <span>•</span>
+                            </li>
+                            <li id="menu-item-rating" class="menu-item">
+                                <a href="http://javarush.ru/rating" title="Рейтинги" target="_top">Рейтинги</a>
+                                <span>•</span>
+                            </li>
+                            <li id="menu-item-articles" class="menu-item">
+                                <a href="http://javarush.ru/articles.html" title="Статьи" target="_top">Статьи</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li id="menu-item-reviews" class="menu-item has-sub">
+                        <a href="http://javarush.ru/reviews.html" target="_top">Отзывы</a>
+                        <ul class="sub-menu">
+                            <li id="menu-item-rev" class="menu-item">
+                                <a href="http://javarush.ru/reviews.html" title="Отзывы" target="_top">Отзывы</a>
+                                <span>•</span>
+                            </li>
+                            <li id="menu-item-his" class="menu-item">
+                                <a href="http://info.javarush.ru/tag/%D1%82%D1%80%D1%83%D0%B4%D0%BE%D1%83%D1%81%D1%82%D1%80%D0%BE%D0%B9%D1%81%D1%82%D0%B2%D0%BE/" title="Истории успеха" target="_top">Истории успеха</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li id="menu-item-about-us" class="menu-item has-sub">
+                        <a href="http://javarush.ru/21.html" target="_top">О нас</a>
+                        <ul class="sub-menu">
+                            <li id="menu-item-mission" class="menu-item">
+                                <a href="http://javarush.ru/21.html" title="Миссия" target="_top">Наша Команда </a>
+                                <span>•</span>
+                            </li>
+                            <li id="menu-item-news" class="menu-item">
+                                <a href="http://info.javarush.ru/blog/news/" title="Новости проекта" target="_top">Новости проекта</a>
+                                <span>•</span>
+                            </li>
+                            <li id="menu-item-social" class="menu-item">
+                                <a href="http://javarush.ru/social.html" title="Мы в социальных сетях" target="_top">Мы в соцсетях</a>
+                                <span>•</span>
+                            </li>
+                            <li id="menu-item-honorcode" class="menu-item">
+                                <a href="http://info.javarush.ru/page/honorcode/" target="_top">Кодекс Чести</a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                    <li id="menu-item-help" class="menu-item has-sub">
+                        <a href="http://help.javarush.ru/" target="_top">Помощь</a>
+                        <ul class="sub-menu">
+                            <li id="menu-item-help-jr" class="menu-item">
+                                <a href="http://help.javarush.ru/" title="" target="_top">Помощь</a>
+                                <span>•</span>
+                            </li>
+                            <li id="menu-item-faq" class="menu-item">
+                                <a href="http://info.javarush.ru/page/FAQ/" title="FAQ" target="_top">FAQ</a>
+                                <span>•</span>
+                            </li>
+                            <li id="menu-item-search" class="menu-item">
+                                <a href="http://google.ru/search?q=site%3Ajavarush.ru" title="Поиск" target="_top">Поиск</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Page Header end-->
+
+<div class="wrapper">
+
+<section class="lesson">
+    <div class="section_header">
+        <div class="avatar zapp"></div>
+        <h2>10. Домашние и бонусные задания</h2>
+    </div>
+    <p>- Здорово, боец!</p>
+    <p class="amigo">- Здравия желаю, товарищ капитан!</p>
+    <p>- У меня для тебя шикарная новость. Вот тебе задания для закрепления полученных навыков. Выполняй их каждый день, и твои навыки будут расти с неимоверной скоростью. Они специально разработаны для выполнения их в Intellij IDEA.</p>
+    <table class="table_task">
+        <tbody><tr>
+            <th>Дополнительные задания для выполнения в Intellij Idea</th>
+        </tr>
+        <tr>
+            <td><button class="idea-task-button"></button><b>1. Общий список</b><br><br>
+                1. Изменить класс <span class="taskcode">Solution</span> так, чтобы он стал списком. (Необходимо реализовать интерфейс <span class="taskcode">java.util.List</span>).<br>
+		2. Список <span class="taskcode">Solution</span> должен работать только с целыми числами <span class="taskcode">Long</span>.<br>
+		3. Воспользуйтесь полем <span class="taskcode">original</span>.<br>
+		4. Список будет использоваться нитями, поэтому позаботьтесь, чтобы все методы были синхронизированы.
+            </td>
+        </tr>
+        <tr>
+            <td><button class="idea-task-button"></button><b>2. Comparable</b><br><br>
+		Реализуйте интерфейс <span class="taskcode">Comparable&lt;Beach&gt;</span> в классе <span class="taskcode">Beach</span>, который будет использоваться нитями.
+            </td>
+        </tr>
+        <tr>
+            <td><button class="idea-task-button"></button><b>3. Аптека</b><br><br>
+                Реализуй интерфейс <span class="taskcode">Runnable</span> в классах <span class="taskcode">Apteka</span> и <span class="taskcode">Person</span>.<br>
+		Все нити должны работать пока не <span class="taskcode">isStopped</span><br>
+		Логика для <span class="taskcode">Apteka</span>: <span class="taskcode">drugsController</span> должен сделать закупку случайного лекарства (<span class="taskcode">getRandomDrug</span>) в количестве (<span class="taskcode">getRandomCount</span>) и подождать 300 мс<br>
+		Логика для <span class="taskcode">Person</span>: <span class="taskcode">drugsController</span> должен сделать продажу случайного лекарства (<span class="taskcode">getRandomDrug</span>) в количестве (<span class="taskcode">getRandomCount</span>) и подождать 100 мс<br>
+		Расставь <span class="taskcode">synchronized</span> там, где это необходимо
+        </td></tr>
+        <tr>
+            <td><button class="idea-task-button"></button><b>4. Синхронизированные методы</b><br><br>
+                Установить модификатор <span class="taskcode">synchronized</span> только тем методам, которым необходимо.<br>
+		Объект класса <span class="taskcode">Solution</span> будет использоваться нитями.
+            </td>
+        </tr>
+        <tr>
+            <td><button class="idea-task-button"></button><b>5. Лишняя синхронизация</b><br><br>
+                <span class="taskcode">synchronized</span> существенно замедляет программу, поэтому убери избыточность <span class="taskcode">synchronized</span> внутри методов
+            </td>
+        </tr>
+        <tr>
+            <td><button class="idea-task-button"></button><b>6. Глажка</b><br><br>
+                И снова быт...<br>
+		Поставьте один <span class="taskcode">synchronized</span>, чтобы <span class="taskcode">diana</span> и <span class="taskcode">igor</span> гладили по-очереди, ведь утюг всего один!<br><br>
+        Подсказка: использовать блокировку на уровне класса.
+            </td>
+        </tr>
+        <tr>
+            <td><button class="idea-task-button"></button><b>7. ApplicationContext</b><br><br>
+                <span class="taskcode">ApplicationContext</span> будет доступен множеству нитей.<br>
+		Сделать так, чтобы данные не терялись: подумай, какое ключевое слово необходимо поставить и где.
+            </td>
+        </tr>
+        <tr>
+            <td><button class="idea-task-button"></button><b>8. Банкомат</b><br><br>
+                Разберись, как работает программа<br>
+		Во время тестирования лог содержит следующее:<br>
+		.....<br>
+		Добавляем 100, на счету 1100<br>
+		Добавляем 100, на счету 1200<br>
+		Тратим 1000, на счету 100<br>
+		Недостаточно денег<br>
+		.....<br><br>
+
+		Создан баг: При списании денег со счета теряются деньги<br>
+		Найти и исправить ошибку 
+            </td>
+        </tr>
+        <tr>
+            <td><button class="idea-task-button"></button><b>9. Транзакционность</b><br><br>
+                Сделать метод <span class="taskcode">joinData</span> транзакционным, т.е. если произошел сбой, то данные не должны быть изменены.<br>
+		1. Считать с консоли 2 имени файла<br>
+		2. Считать построчно данные из файлов. Из первого файла - в <span class="taskcode">allLines</span>, из второго - в <span class="taskcode">forRemoveLines</span><br>
+		В методе <span class="taskcode">joinData</span>:<br>
+		3. Если список <span class="taskcode">allLines</span> содержит все строки из <span class="taskcode">forRemoveLines</span>, то удалить из списка <span class="taskcode">allLines</span> все строки, которые есть в <span class="taskcode">forRemoveLines</span><br>
+		4. Если список <span class="taskcode">allLines</span> НЕ содержит каких-либо строк, которые есть в <span class="taskcode">forRemoveLines</span>, то<br>
+		4.1. очистить <span class="taskcode">allLines</span> от данных<br>
+        4.2. выбросить исключение <span class="taskcode">CorruptedDataException</span><br>
+		Метод <span class="taskcode">joinData</span> должен вызываться в <span class="taskcode">main</span>. Все исключения обработайте в методе <span class="taskcode">main</span>.
+            </td>
+        </tr>
+        <tr>
+            <td><button class="idea-task-button"></button><b>10. Посчитаем</b><br><br>
+                1. Сделай так, чтобы результат успел посчитаться для всех элементов массива <span class="taskcode">values</span> НЕ используя <span class="taskcode">Thread.sleep</span><br>
+		2. Исправь <span class="taskcode">synchronized</span> блок так, чтобы массив values заполнился значением 1
+            </td>
+        </tr>
+    </tbody></table>
+    <p>- Те задания были для духов. Для дедушек я добавил бонусные задания повышенной сложности. Только для старослужащих. </p>
+    <table class="table_task">
+        <tbody><tr>
+            <th></th>
+        </tr>
+        <tr>
+            <td><button class="bonus-task-button"></button><b>1. CRUD</b><br><br>
+                <u>Задача:</u> CrUD - Create, Update, Delete<br>
+		Программа запускается с одним из следующих наборов параметров:<br>
+		-c name sex bd<br>
+		-u id name sex bd<br>
+		-d id<br>
+		-i id<br>
+		Значения параметров:<br>
+		name - имя, <span class="taskcode">String</span><br>
+		sex - пол, "м" или "ж", одна буква<br>
+		bd - дата рождения в следующем формате 15/04/1990<br>
+		-с  - добавляет человека с заданными параметрами в конец <span class="taskcode">allPeople</span>, выводит id (index) на экран<br>
+		-u  - обновляет данные человека с данным id<br>
+		-d  - производит логическое удаление человека с id<br>
+		-i  - выводит на экран информацию о человеке с id: name sex (м/ж) bd (формат 15-Apr-1990)<br><br>
+
+		id соответствует индексу в списке<br>
+		Все люди должны храниться в <span class="taskcode">allPeople</span><br>
+		Используйте <span class="taskcode">Locale.ENGLISH</span> в качестве второго параметра для <span class="taskcode">SimpleDateFormat</span><br><br>
+
+		Пример параметров: -c Миронов м 15/04/1990
+            </td>
+        </tr>
+        <tr>
+            <td><button class="bonus-task-button"></button><b>2. CRUD 2</b><br><br>
+                <u>Задача:</u> CrUD Batch - multiple Creation, Updates, Deletion<br>
+		Программа запускается с одним из следующих наборов параметров:<br>
+		-c name1 sex1 bd1 name2 sex2 bd2 ...<br>
+		-u id1 name1 sex1 bd1 id2 name2 sex2 bd2<br>
+		-d id1 id2 id3 id4 ...<br>
+		-i id1 id2 id3 id4 ...<br>
+		Значения параметров:<br>
+		name - имя, <span class="taskcode">String</span><br>
+		sex - пол, "м" или "ж", одна буква<br>
+		bd - дата рождения в следующем формате 15/04/1990<br>
+		-с  - добавляет всех людей с заданными параметрами в конец <span class="taskcode">allPeople</span>, выводит id (index) на экран в соответствующем порядке<br>
+		-u  - обновляет соответствующие данные людей с заданными id<br>
+		-d  - производит логическое удаление всех людей с заданными id<br>
+		-i  - выводит на экран информацию о всех людях с заданными id: name sex bd<br><br>
+
+		id соответствует индексу в списке<br>
+		Формат вывода даты рождения 15-Apr-1990<br>
+		Все люди должны храниться в <span class="taskcode">allPeople</span><br>
+		Порядок вывода данных соответствует вводу данных<br>
+		Обеспечить корректную работу с данными для множества нитей (чтоб не было затирания данных)<br>
+		Используйте <span class="taskcode">Locale.ENGLISH</span> в качестве второго параметра для <span class="taskcode">SimpleDateFormat</span>
+            </td>
+        </tr>
+        <tr>
+            <td><button class="bonus-task-button"></button><b>3. Ресторан</b><br><br>
+                <u>Задача:</u> 1.Разберись, что делает программа. Официант почему-то не относит приготовленные блюда назад к столам :(<br>
+		2.Исправь ошибку.<br><br>
+		Подсказка: это одна строчка
+            </td>
+        </tr>
+    </tbody></table>
+    <div class="section_footer">
+        <button class="next_lesson" style="visibility: hidden;"></button>
+        <div class="line"></div>
+    </div>
+</section>
+
+<section class="lesson">
+    <div class="section_header">
+        <div class="avatar julio"></div>
+        <h2>9. Хулио</h2>
+    </div>
+    <p>- Привет, Амиго! Ты сегодня хорошо решал задачи. Садись смотреть видео.</p>
+
+    <video poster="http://storage.javarush.ru/alpha/video/video-snapshot-ru-17.gif" controls="" preload="none" tabindex="0" class="movie-futurama" id="eyephoneMoviePlayer" taskkey="level17,lesson09,none01">
+        <source src="http://storage.javarush.ru/alpha/video/video-ru-17.mp4" type="video/mp4">
+    </video>
+    <p></p><center><a href="https://www.youtube.com/watch?v=IuMskex_0Hc" target="_blank">Оригинал видео на YouTube</a></center><p></p>
+
+    <div class="section_footer">
+        <button class="next_lesson" style="visibility: hidden;"></button>
+        <div class="line"></div>
+    </div>
+</section>
+
+<section class="lesson">
+    <div class="section_header">
+        <div class="avatar professor"></div>
+        <h2>8. Ссылка на вики, synchronized, volatile, yield</h2>
+    </div>
+    <p>- У меня есть для тебя новый материал по критическим секциям и модификатору <b>synchronized</b>. Там довольно много нового и сложного материала. Не стоит сильно вдаваться в детали. Смотри на него пока как на дополнительный взгляд на материал нынешнего уровня. В дальнейшем мы будем глубоко погружаться в эту тему, но пока тебе это не нужно. Почитай вот:</p>
+    <p><a href="http://wikijava.it-cache.net/index.php@title=Glava_17_Thinking_in_Java_4th_edition.html#.D0.9A.D1.80.D0.B8.D1.82.D0.B8.D1.87.D0.B5.D1.81.D0.BA.D0.B8.D0.B5_.D1.81.D0.B5.D0.BA.D1.86.D0.B8.D0.B8" target="_blank">Ссылка на вики, synchronized, volatile, yield</a></p>
+    <div class="section_footer">
+        <button class="next_lesson" style="visibility: hidden;"></button>
+        <div class="line"></div>
+    </div>
+</section>
+
+<section class="lesson">
+    <div class="section_header">
+        <div class="avatar zoidberg"></div>
+        <h2>7. yield - пропуск хода</h2>
+    </div>
+    <p>- Привет, Амиго! У нас сегодня будет небольшой и интересный урок. Я расскажу тебе про <span class="red_text">yield</span> – статический метод класса Thread. </p>
+    <p>Элли тебе уже рассказывала, что процессор постоянно переключается между нитями. Каждой нити выделяется небольшой кусочек процессорного времени, называемый <b>квантом</b>. Когда это время истекает – процессор переключается на другую нить и начинает выполнять ее команды. Вызов метода <span class="blue_text"><b>Thread.yield()</b></span> позволяет досрочно завершить квант времени текущей нити или, другими словами, переключает процессор на следующую нить.</p>
+    <p class="amigo">- А зачем нити может понадобиться уступить свое время другой нити?</p>
+    <p>- Необходимость в этом возникает не часто. Вызов <b>yield</b> приводит к тому, что «наша нить досрочно завершает ход», и что следующая за <b>yield</b> команда начнется с полного кванта времени. Значит шансы, что ее прервут – меньше. Особенно, если она небольшая (по времени). Такой подход можно использовать при оптимизации некоторых процессов.</p>
+    <p>Еще могу добавить, что метод <b>Thread.sleep(0)</b> работает фактически так же. Думаю, ты вначале будешь использовать метод <b>yield</b> не очень часто, но знать о нем - полезно.</p>
+    <div class="section_footer">
+        <button class="next_lesson" style="visibility: hidden;"></button>
+        <div class="line"></div>
+    </div>
+</section>
+
+<section class="lesson">
+    <div class="section_header">
+        <div class="avatar diego"></div>
+        <h2>6. Задачи на volatile</h2>
+    </div>
+    <p>- Привет, Амиго! </p>
+    <table class="table_task">
+        <tbody><tr>
+            <th>Задачи</th>
+        </tr>
+        <tr>
+            <td><button class="task_button" taskkey="level17,lesson06,task01" disabled=""></button><b>1. Заметки для всех</b><br><br>
+                Класс <span class="taskcode">Note</span> будет использоваться нитями.<br>
+		Поэтому сделай так, чтобы лист <span class="taskcode">notes</span> находился в общей памяти
+            </td>
+        </tr>
+        <tr>
+            <td><button class="task_button" taskkey="level17,lesson06,task02" disabled=""></button><b>2. Предложения</b><br><br>
+                Не используя <span class="taskcode">synchronized</span> сделайте так, чтобы количество сделанных и принятых предложений было одинаковым.  
+            </td>
+        </tr>
+    </tbody></table>
+
+    <div class="section_footer">
+        <button class="next_lesson" style="visibility: hidden;"></button>
+        <div class="line"></div>
+    </div>
+</section>
+
+
+<section class="lesson">
+    <div class="section_header">
+        <div class="avatar risha"></div>
+        <h2>5. Кэш. проблема многопоточности - локальный кэш. volatile</h2>
+    </div>
+    <p>- Привет, Амиго! Помнишь, Элли тебе рассказывала про проблемы при одновременном доступе нескольких нитей к общему (разделяемому) ресурсу?</p>
+    <p class="amigo">- Да.</p>
+    <p>- Так вот – это еще не все. Есть еще небольшая проблема.</p>
+    <p>Как ты знаешь, в компьютере есть память, где хранятся данные и команды (код), а также  процессор, который исполняет эти команды и работает с данными. Процессор считывает данные из памяти, изменяет и записывает их обратно в память. Чтобы ускорить работу процессора в него встроили свою «быструю» память – кэш.</p>
+    <p>Чтобы ускорить свою работу, процессор копирует самые часто используемые переменные и области памяти в свой кэш и все изменения с ними производит в этой быстрой памяти. А после – копирует обратно в «медленную» память. Медленная память все это время содержит старые(!) (неизмененные) значения переменных.</p>
+    <p>И тогда может возникнуть проблема. <span class="red_text">Одна нить меняет переменную</span>, такую как isCancel или isInterrupted из примера выше, а <span class="red_text">вторая нить «не видит» этого изменения</span>, т.к. оно было совершено в быстрой памяти. Это следствие того, что нити не имеют доступа к кэшу друг друга. (Процессор часто содержит несколько независимых ядер и нити физически могут исполняться на разных ядрах.)</p>
+    <p>Вспомним вчерашний пример:</p>
+    <table class="table_example wide-table">
+    <tbody><tr><th width="50%">Код</th><th width="50%">Описание</th></tr>
+    <tr>
+    <td class="monospace_text wide-text"><b>class</b> Clock <b>implements Runnable</b><br>
+{<br>
+   &nbsp;<b>private</b> boolean isCancel = false;<br><br>
+
+   &nbsp;<b>public</b> void <b>cancel</b>() <br>
+   &nbsp;{<br>
+     &nbsp;&nbsp;this.isCancel = true;<br>
+   &nbsp;}<br><br>
+
+   &nbsp;<b>public</b> void run()<br>
+  &nbsp;{<br>
+     &nbsp;&nbsp;<b>while</b> <span class="red_text">(!this.isCancel)</span><br>
+    &nbsp;&nbsp;{<br>
+       &nbsp;&nbsp;&nbsp;Thread.sleep(1000);<br>
+       &nbsp;&nbsp;&nbsp;System.out.println("Tik");<br>
+    &nbsp;&nbsp;}<br>
+  &nbsp;}<br>
+}
+</td>
+                <td class="wide-text">Нить «не знает» о существовании других нитей.<br><br>
+
+В методе run переменная isCancel при первом использовании будет помещена в кэш дочерней нити. Эта операция эквивалентна коду:<br><br>
+
+   <span class="monospace_text"><b>public</b> void run()<br>
+  {<br>
+     &nbsp;<span class="red_text">boolean <b>isCancelCached</b> = this.isCancel;</span><br>
+     &nbsp;<b>while</b> (!isCancelCached)<br>
+    &nbsp;{<br>
+       &nbsp;&nbsp;Thread.sleep(1000);<br>
+       &nbsp;&nbsp;System.out.println("Tik");<br>
+    &nbsp;}<br>
+  }</span><br><br>
+
+Вызов метода <b>cancel</b> из другой нити поменяет значение переменной <b>isCancel</b> в обычной (медленной) памяти, но не в кэше остальных нитей.
+</td>
+                
+            </tr>
+     <tr><td class="monospace_text wide-text"><b>public static void</b> main(<b>String</b>[] args)<br>
+{<br>
+    &nbsp;Clock clock = new Clock();<br>
+    &nbsp;Thread clockThread = new Thread(clock);<br>
+    &nbsp;clockThread.start();<br><br>
+   
+    &nbsp;Thread.sleep(10000);<br>
+    &nbsp;clock.<b>cancel</b>();<br>
+}
+	</td>
+     	<td class="wide-text">
+	</td>
+	</tr>
+        </tbody>
+    </table>
+    <p class="amigo">- Ничего себе! А для этой проблемы тоже придумали красивое решение, как в случае с <b>synchronized</b>?</p>
+    <p>- Ты не поверишь!</p>
+    <p>Сначала думали отключить работу с кэшем, но потом оказалось, что из-за этого программы работают в разы медленнее. Тогда придумали другое решение.</p>
+    <p>Было придумано специальное ключевое слово <span class="red_text"><b>volatile</b></span>. Помещение его перед определением переменной запрещало помещать ее значение в кэш. Вернее не запрещало помещать в кэш, а просто принудительно всегда читало и писало ее только в обычную (медленную) память.</p>
+    <p>Вот как нужно исправить наше решение, чтобы все стало отлично работать:</p>
+        <table class="table_example wide-table">
+    <tbody><tr><th width="55%">Код</th><th width="45%">Описание</th></tr>
+    <tr>
+    <td class="monospace_text wide-text"><b>class</b> Clock implements Runnable<br>
+{<br>
+   &nbsp;<b>private <span class="red_text">volatile</span></b> boolean isCancel = false;<br><br>
+
+   &nbsp;<b>public</b> void <b>cancel</b>() <br>
+   &nbsp;{<br>
+     &nbsp;&nbsp;this.<b>isCancel</b> = true;<br>
+   &nbsp;}<br><br>
+
+   &nbsp;<b>public</b> void run()<br>
+  &nbsp;{<br>
+     &nbsp;&nbsp;<b>while</b> <span class="red_text">(!this.isCancel)</span><br>
+    &nbsp;&nbsp;{<br>
+       &nbsp;&nbsp;&nbsp;Thread.sleep(1000);<br>
+       &nbsp;&nbsp;&nbsp;System.out.println("Tik");<br>
+    &nbsp;&nbsp;}<br>
+  &nbsp;}<br>
+}
+</td>
+                <td class="wide-text">Из-за модификатора volatile чтение и запись значения переменной всегда будут происходить в обычной, общей для всех нитей, памяти. 
+</td>
+                
+            </tr>
+     <tr><td class="monospace_text wide-text"><b>public static void</b> main(<b>String</b>[] args)<br>
+{<br>
+    &nbsp;Clock clock = new Clock();<br>
+    &nbsp;Thread clockThread = new Thread(clock);<br>
+    &nbsp;clockThread.start();<br><br>
+   
+    &nbsp;Thread.sleep(10000);<br>
+    &nbsp;clock.<b>cancel</b>();<br>
+}
+	</td>
+     	<td class="wide-text">
+	</td>
+	</tr>
+        </tbody>
+    </table>
+    <p class="amigo">- И все?</p>
+    <p>- Да. Просто и красиво.</p>
+    <div class="section_footer">
+        <button class="next_lesson" style="visibility: hidden;"></button>
+        <div class="line"></div>
+    </div>
+</section>
+
+<section class="lesson">
+    <div class="section_header">
+        <div class="avatar diego"></div>
+        <h2>4. Задачи на synchronized</h2>
+    </div>
+    <p>- Привет, Амиго! </p>
+    <table class="table_task">
+        <tbody><tr>
+            <th>Задачи</th>
+        </tr>
+        <tr>
+            <td><button class="task_button" taskkey="level17,lesson04,task01" disabled=""></button><b>1. Синхронизированные заметки</b><br><br>
+                1. Класс <span class="taskcode">Note</span> будет использоваться нитями. Поэтому сделай так, чтобы обращения к листу <span class="taskcode">notes</span> блокировали мютекс <span class="taskcode">notes</span>, не <span class="taskcode">this</span><br>
+		2. Все <span class="taskcode">System.out.println</span> не должны быть заблокированы (синхронизированы), т.е. не должны находиться в блоке <span class="taskcode">synchronized</span>
+            </td>
+        </tr>
+        <tr>
+            <td><button class="task_button" taskkey="level17,lesson04,task02" disabled=""></button><b>2. Синхронизированные заметки 2</b><br><br>
+                Класс <span class="taskcode">Note</span> будет использоваться нитями. Поэтому сделай так, чтобы все методы были синхронизированы
+            </td>
+        </tr>
+        <tr>
+            <td><button class="task_button" taskkey="level17,lesson04,task03" disabled=""></button><b>3. Сад-огород</b><br><br>
+                1. Создайте метод <span class="taskcode">public void addFruit(int index, String fruit)</span> - который добавляет параметр <span class="taskcode">fruit</span> в лист <span class="taskcode">fruits</span> на позицию <span class="taskcode">index</span><br>
+		2. Создайте метод <span class="taskcode">public void removeFruit(int index)</span> - который удаляет из <span class="taskcode">fruits</span> элемент с индексом <span class="taskcode">index</span><br>
+		3. Создайте метод <span class="taskcode">public void addVegetable(int index, String vegetable)</span> - который добавляет параметр <span class="taskcode">vegetable</span> в лист <span class="taskcode">vegetables</span> на позицию <span class="taskcode">index</span><br>
+		4. Создайте метод <span class="taskcode">public void removeVegetable(int index)</span> - который удаляет из <span class="taskcode">vegetables</span> элемент с индексом <span class="taskcode">index</span><br>
+		5. Класс <span class="taskcode">Garden</span> будет использоваться нитями. Поэтому сделай так, чтобы все методы блокировали мютекс <span class="taskcode">this</span><br>
+		6. Реализуй это минимальным количеством кода
+            </td>
+        </tr>
+	  <tr>
+            <td><button class="task_button" taskkey="level17,lesson04,task04" disabled=""></button><b>4. Синхронизированный президент</b><br><br>
+                И снова <span class="taskcode">Singleton</span> паттерн - синхронизация в статическом блоке<br>
+		Внутри класса <span class="taskcode">OurPresident</span> в статическом блоке создайте синхронизированный блок.<br>
+		Внутри синхронизированного блока инициализируйте <span class="taskcode">president</span>.
+            </td>
+        </tr>
+	  <tr>
+            <td><button class="task_button" taskkey="level17,lesson04,task05" disabled=""></button><b>5. МВФ</b><br><br>
+                <span class="taskcode">Singleton</span> паттерн - синхронизация в методе<br>
+		IMF - это Международный Валютный Фонд<br>
+		Внутри метода <span class="taskcode">getFund</span> создайте синхронизированный блок<br>
+		Внутри синхронизированного блока инициализируйте переменную <span class="taskcode">imf</span> так, чтобы метод <span class="taskcode">getFund</span> всегда возвращал один и тот же объект
+            </td>
+        </tr>
+    </tbody></table>
+
+    <div class="section_footer">
+        <button class="next_lesson" style="visibility: hidden;"></button>
+        <div class="line"></div>
+    </div>
+</section>
+
+<section class="lesson">
+    <div class="section_header">
+        <div class="avatar elly"></div>
+        <h2>3. synchronized</h2>
+    </div>
+    <p>- Привет, Амиго! У нас есть панацея – лекарство от всех болезней. Как мы уже успели убедиться – неконтролируемое переключение нитей – это проблема.</p>
+    <p class="amigo">- А почему бы нитям самим не решать, когда переключиться на следующую? Сделала все важные дела и «маякует», я – все!</p>
+    <p>- Разрешать нитям самим управлять своим переключением – еще большая проблема. Вдруг какой-то код не очень красиво написан, и нить никогда сама не отдаст свое «процессорное время». Давным-давно так и было – и это был тихий ужас.</p>
+    <p class="amigo">- Ладно. И какое же решение есть?</p>
+    <p>- <span class="red_text"><b>Блокировка нитей.</b></span> И вот как это работает. </p>
+    <p>Было выяснено, что <span class="red_text">нити мешают друг другу, когда пытаются сообща работать с общими объектами и/или ресурсами</span>. Как в примере с выводом на консоль: консоль одна, а выводят на нее все нити. Непорядок.</p>
+    <p>Поэтому был придуман специальный объект – <span class="red_text">мютекс</span>. Это как табличка на двери туалета <span class="green_text">«свободно»</span> <span class="red_text">«занято»</span>. Он имеет два состояния – <span class="green_text">объект свободен</span> и <span class="red_text">объект занят</span>, или их еще называют <span class="red_text">заблокирован</span> и <span class="green_text">разблокирован</span>.</p>
+    <p>Когда какой-то нити нужен общий для всех нитей объект, она проверяет мютекс, связанный с этим объектом. Если мютекс свободен, то нить блокирует его (помечает как занятый) и начинает использование общего ресурса. После того, как она сделала свои дела, мютекс разблокируется (помечается как свободен).</p>
+    <p>Если же нить хочет использовать объект, а мютекс заблокирован, то нить засыпает в ожидании. Когда мютекс, наконец, освободится занятой нитью, наша нить тут же заблокирует его и приступит к работе. Аналогия с табличками для туалета один в один.</p>
+    <p class="amigo">- А как работать с этим мютексом. Надо создавать специальные объекты?</p>
+    <p>- Все намного проще. <span class="red_text">Разработчики Java встроили этот мютекс в класс Object. Тебе даже создавать его не придется. Он есть у каждого объекта.</span> Вот как это все работает:</p>
+    <table class="table_example">
+    <tbody><tr><th width="50%">Код</th><th width="50%">Описание</th></tr>
+    <tr>
+    <td class="monospace_text wide-text"><b>class</b> MyClass<br> 
+{<br>
+   &nbsp;private String name1 = "Оля";<br>
+   &nbsp;private String name2 = "Лена";<br><br>
+
+    &nbsp;<b>public void</b> swap()<br>
+   &nbsp;{<br>
+     &nbsp;&nbsp;<span class="red_text"><b>synchronized (this)</b></span><br>
+    &nbsp;&nbsp;{<br>
+         &nbsp;&nbsp;&nbsp;String s = name1;<br>
+         &nbsp;&nbsp;&nbsp;name1 = name2;<br>
+         &nbsp;&nbsp;&nbsp;name2 = s;<br>
+    &nbsp;&nbsp;}<br>
+  &nbsp;}<br>
+}
+</td>
+                <td class="wide-text">Метод swap меняет местами значения переменных name1 &amp; name2.<br><br>
+	
+		Что же будет если его вызывать из двух нитей одновременно?
+</td>
+                
+            </tr>
+    
+    </tbody></table>
+    <table class="table_example">
+    <tbody><tr><th width="33%">Итоговый порядок</th><th width="33%">Код первой нити</th><th width="33%">Код второй нити</th></tr>
+    <tr>
+    <td class="wide-text"><span class="green_text">String s1 = name1;   //Оля<br>
+	name1 = name2;      //Лена<br>
+	name2 = s1;            //Оля</span><br><br>
+
+	<span class="blue_text">String s2 = name1;  //Лена<br>
+	name1 = name2;      //Оля<br>
+	name2 = s2;            //Лена</span>
+    </td>
+    <td class="wide-text"><span class="green_text">String s1 = name1;<br>
+        name1 = name2;</span><br>
+	<span class="grey_text">исполняется другая нить</span><br>
+        <span class="green_text">name2 = s1;</span>
+    </td>
+    <td class="wide-text"><span class="grey_text">нить ждет, пока освободится мютекс</span><br><br>
+
+        <span class="blue_text">String s2 = name1;<br>
+        name1 = name2;</span><br>
+	<span class="grey_text">исполняется другая нить<br>
+	исполняется другая нить</span><br>
+        <span class="blue_text">name2 = s2;</span>      
+    </td>
+    </tr>
+    </tbody></table>
+    
+    <table class="table_example">
+    <tbody><tr><th width="33%">Итог</th></tr>
+    <tr>
+    <td class="wide-text">Значения переменных были дважды обменяны местами и вернулись на первоначальное место.
+    </td>
+    </tr>
+    </tbody></table>
+    <p>Обрати внимание на ключевое слово <span class="red_text"><b>synchronized</b></span>.</p>
+    <p class="amigo">- Да, а что оно значит?</p>
+    <p>- <b>Когда одна нить заходит внутрь блока кода, помеченного словом <span class="red_text">synchronized</span>, то Java-машина тут же блокирует мютекс у объекта, который указан в круглых скобках после слова synchronized. <span class="red_text">Больше ни одна нить не сможет зайти в этот блок, пока наша нить его не покинет.</span> Как только наша нить выйдет из блока, помеченного synchronized, то мютекс тут же автоматически разблокируется и будет свободен для захвата другой нитью.</b></p>
+    <p>Если же мютекс был занят, то наша нить будет стоять на месте и ждать когда он освободится.</p>
+    <p class="amigo">- Так просто и так элегантно. Красивое решение.</p>
+    <p>- Ага. А как ты думаешь, что будет в этом случае?</p>
+    <table class="table_example">
+    <tbody><tr><th width="50%">Код</th><th width="50%">Описание</th></tr>
+    <tr>
+    <td class="monospace_text wide-text"><b>class</b> MyClass<br> 
+{<br>
+   &nbsp;<b>private</b> String name1 = "Оля";<br>
+   &nbsp;<b>private</b> String name2 = "Лена";<br><br>
+
+    &nbsp;<b>public void</b> swap()<br>
+   &nbsp;{<br>
+     &nbsp;&nbsp;<span class="red_text"><b>synchronized</b></span> <span class="red_text">(<b>this</b>)</span><br>
+    &nbsp;&nbsp;{<br>
+         &nbsp;&nbsp;&nbsp;String s = name1;<br>
+         &nbsp;&nbsp;&nbsp;name1 = name2;<br>
+         &nbsp;&nbsp;&nbsp;name2 = s;<br>
+    &nbsp;&nbsp;}<br>
+  &nbsp;}<br><br>
+
+    &nbsp;<b>public void</b> swap2()<br>
+   &nbsp;{<br>
+     &nbsp;&nbsp;<span class="red_text"><b>synchronized</b></span> <span class="red_text">(<b>this</b>)</span><br>
+    &nbsp;&nbsp;{<br>
+         &nbsp;&nbsp;&nbsp;String s = name1;<br>
+         &nbsp;&nbsp;&nbsp;name1 = name2;<br>
+         &nbsp;&nbsp;&nbsp;name2 = s;<br>
+    &nbsp;&nbsp;}<br>
+  &nbsp;}<br>
+}
+</td>
+                <td class="wide-text"><span class="red_text">Методы swap и swap2 имеют один и тот же <b>мютекс</b> – объект <b>this</b>.</span>
+</td>
+                
+            </tr>
+    </tbody></table>
+    <p>Что будет, если одна нить вызовет метод swap, а другая – метод swap2?</p>
+    <p class="amigo">- Т.к. мютекс у них один, то второй нити придется ждать, пока первая нить выйдет из блока <b>synchronized</b>, поэтому проблем с одновременным доступом тут не будет.</p>
+    <p>- Молодец, Амиго! Верное решение!</p>
+    <p>Хотелось бы обратить твое внимание на то, что словом <span class="red_text">synchronized</span> может быть помечен как кусок кода, так и метод. Вот что это значит:</p>
+    <table class="table_example wide-table">
+    <tbody><tr><th width="50%">Код</th><th width="50%">Что происходит на самом деле</th></tr>
+    <tr>
+    <td class="monospace_text wide-text"><b>class</b> MyClass<br> 
+{<br>
+   &nbsp;<b>private <span class="blue_text">static</span></b> String name1 = "Оля";<br>
+   &nbsp;<b>private <span class="blue_text">static</span></b> String name2 = "Лена";<br><br>
+
+    &nbsp;<b>public <span class="red_text">synchronized</span> void</b> swap()<br>
+   &nbsp;{<br>
+         &nbsp;&nbsp;String s = name1;<br>
+         &nbsp;&nbsp;name1 = name2;<br>
+         &nbsp;&nbsp;name2 = s;<br>
+  &nbsp;}<br><br>
+
+    &nbsp;<b>public <span class="blue_text">static</span> <span class="red_text">synchronized</span> void</b> swap2()<br>
+   &nbsp;{<br>
+         &nbsp;&nbsp;String s = name1;<br>
+         &nbsp;&nbsp;name1 = name2;<br>
+         &nbsp;&nbsp;name2 = s;<br>
+  &nbsp;}<br>
+}
+</td>
+                <td class="monospace_text"><b>class</b> MyClass<br> 
+{<br>
+   &nbsp;<b>private <span class="blue_text">static</span></b> String name1 = "Оля";<br>
+   &nbsp;<b>private <span class="blue_text">static</span></b> String name2 = "Лена";<br><br>
+
+    &nbsp;<b>public void</b> swap()<br>
+   &nbsp;{<br>
+     &nbsp;&nbsp;<span class="red_text"><b>synchronized</b></span> (<b>this</b>)<br>
+    &nbsp;&nbsp;{<br>
+         &nbsp;&nbsp;&nbsp;String s = name1;<br>
+         &nbsp;&nbsp;&nbsp;name1 = name2;<br>
+         &nbsp;&nbsp;&nbsp;name2 = s;<br>
+    &nbsp;&nbsp;}<br>
+  &nbsp;}<br><br>
+
+    &nbsp;<b>public <span class="blue_text">static</span></b> void swap2()<br>
+   &nbsp;{<br>
+     &nbsp;&nbsp;<span class="red_text"><b>synchronized</b></span> (<span class="blue_text"><b>MyClass.class</b></span>)<br>
+    &nbsp;&nbsp;{<br>
+         &nbsp;&nbsp;&nbsp;String s = name1;<br>
+         &nbsp;&nbsp;&nbsp;name1 = name2;<br>
+         &nbsp;&nbsp;&nbsp;name2 = s;<br>
+    &nbsp;&nbsp;}<br>
+  &nbsp;}
+</td>
+                
+            </tr>
+    </tbody></table>
+    <div class="section_footer">
+        <button class="next_lesson" style="visibility: hidden;"></button>
+        <div class="line"></div>
+    </div>
+</section>
+
+<section class="lesson">
+    <div class="section_header">
+        <div class="avatar diego"></div>
+        <h2>2. Задачи на общий ресурс - вывод в консоль..</h2>
+    </div>
+    <p>- Привет, Амиго! </p>
+    <table class="table_task">
+        <tbody><tr>
+            <th>Задачи</th>
+        </tr>
+        <tr>
+            <td><button class="task_button" taskkey="level17,lesson02,task01" disabled=""></button><b>1. Заметки</b><br><br>
+                1. Класс <span class="taskcode">Note</span> будет использоваться нитями.<br>
+		2. Создай <span class="taskcode">public static</span> нить <span class="taskcode">NoteThread</span> (<span class="taskcode">Runnable</span> не является нитью), которая в методе <span class="taskcode">run</span> 1000 раз (<span class="taskcode">index</span> = 0-999) сделает следующие действия:<br>
+		2.1. используя метод <span class="taskcode">addNote</span> добавит заметку с именем [<span class="taskcode">getName()</span> + "-Note" + <span class="taskcode">index</span>], например, при <span class="taskcode">index</span>=4<br>
+		"Thread-0-Note4"<br>
+		2.2. используя метод <span class="taskcode">removeNote</span> удалит заметку<br>
+		2.3. в качестве первого параметра в <span class="taskcode">removeNote</span> передай имя нити - метод <span class="taskcode">getName()</span>
+            </td>
+        </tr>
+        <tr>
+            <td><button class="task_button" taskkey="level17,lesson02,task02" disabled=""></button><b>2. Вместе быстрее? Ща проверим :)</b><br><br>
+                1. Разберись, что и как работает<br>
+		2. Создай <span class="taskcode">public static</span> нить <span class="taskcode">SortThread</span>, которая в методе <span class="taskcode">run</span> отсортирует статический массив <span class="taskcode">testArray</span> используя метод <span class="taskcode">sort</span>
+            </td>
+        </tr>
+    </tbody></table>
+
+    <div class="section_footer">
+        <button class="next_lesson" style="visibility: hidden;"></button>
+        <div class="line"></div>
+    </div>
+</section>
+
+<section class="lesson">
+    <div class="section_header">
+        <div class="avatar elly"></div>
+        <h2>1. Проблемы многопоточности: обращение к общему ресурсу</h2>
+    </div>
+    <p>- Привет, Амиго!  Вчера мы обсудили преимущества и удобства, которые несет с собой многонитиевость (multithreading). Теперь пора взглянуть и на минусы. А они, к сожалению, не маленькие.</p>
+    <p><b>Раньше мы смотрели на программу, как на набор объектов, которые вызывают методы друг друга.</b> Теперь все стало немного сложнее. Программа – это скорее набор объектов, по которым лазает несколько «маленьких роботиков» – нитей – и выполняют команды, содержащиеся в методах.</p>
+    <p>Формально – второе не отменяет первое. Это все еще объекты, и они все еще вызывают методы друг у друга. <span class="red_text">Но нужно не забывать, что нитей – несколько, и каждая нить выполняет свою работу – свое задание.</span></p>
+    <p>Программа становится сложнее. <span class="red_text">Разные нити меняют состояние разных объектов в соответствии с задачей, которую каждая из них выполняет. И могут мешать друг другу.</span></p>
+    <p>Но самое страшное происходит глубоко внутри Java-машины. Как я уже рассказывала, видимая одновременность работы нитей достигается за счет того, что процессор постоянно переключается с одной нити на другую. Переключился на нить, поработал 10 миллисекунд, переключился на следующую нить, там поработал 10 миллисекунд и так далее.  И тут возникает проблема: переключение может произойти в самый неподходящий момент. Пример:</p>
+        <table class="table_example">
+    <tbody><tr><th width="50%">Код первой нити</th><th width="50%">Код второй нити</th></tr>
+    <tr>
+    <td class="monospace_text wide-text"><span class="green_text">System.out.print ("Коле");<br>
+	System.out.print ("");<br>
+	System.out.print ("15");<br>
+	System.out.print ("");<br>
+	System.out.print ("лет");<br>
+	System.out.println ();</span>
+    </td>
+    <td class="monospace_text"><span class="blue_text">System.out.print ("Лене");<br>
+	System.out.print ("");<br>
+	System.out.print ("21");<br>
+	System.out.print ("");<br>
+	System.out.print ("год");<br>
+	System.out.println ();</span>
+
+    </td>
+                
+            </tr>
+    
+    </tbody></table>
+    <table class="table_example">
+    <tbody><tr><th width="100%">Ожидаемый вывод на консоль</th></tr>
+    <tr>
+    <td class="wide-text"><span class="green_text">Коле 15 лет</span><br>
+	<span class="blue_text">Лене 21 год</span>
+    </td>
+    </tr>
+    </tbody></table>
+    <table class="table_example">
+    <tbody><tr><th width="33%">Итоговый порядок</th><th width="33%">Код первой нити</th><th width="33%">Код второй нити</th></tr>
+    <tr>
+    <td class="wide-text"><span class="green_text">System.out.print ("Коле");</span><br>
+	<span class="blue_text">System.out.print ("Лене");<br>
+	System.out.print (" ");</span><br>
+	<span class="green_text">System.out.print (" ");<br>
+	System.out.print ("15");</span><br>
+	<span class="blue_text">System.out.print ("21");<br>
+	System.out.print (" ");</span><br>
+	<span class="green_text">System.out.print (" ");<br>
+	System.out.print ("лет");<br>
+	System.out.println ();</span><br>
+	<span class="blue_text">System.out.print ("год");<br>
+	System.out.println ();</span>
+    </td>
+    <td class="wide-text"><span class="green_text">System.out.print ("Коле");</span><br>
+	<span class="grey_text">исполняется другая нить<br>
+	исполняется другая нить</span><br>
+	<span class="green_text">System.out.print (" ");<br>
+	System.out.print ("15");</span><br>
+	<span class="grey_text">исполняется другая нить<br>
+	исполняется другая нить</span><br>
+	<span class="green_text">System.out.print (" ");<br>
+	System.out.print ("лет");<br>
+	System.out.println ();</span><br>
+	<span class="grey_text">исполняется другая нить<br>
+	исполняется другая нить</span>
+    </td>
+    <td class="wide-text"><span class="grey_text">исполняется другая нить</span><br>
+	<span class="blue_text">System.out.print ("Лене");<br>
+	System.out.print (" ");</span><br>
+	<span class="grey_text">исполняется другая нить<br>
+	исполняется другая нить</span><br>
+	<span class="blue_text">System.out.print ("21");<br>
+	System.out.print (" ");</span><br>
+	<span class="grey_text">исполняется другая нить<br>
+	исполняется другая нить<br>
+	исполняется другая нить</span><br>
+	<span class="blue_text">System.out.print ("год");<br>
+	System.out.println ();</span>     
+    </td>
+    </tr>
+    </tbody></table>
+    
+    <table class="table_example">
+    <tbody><tr><th width="33%">Реальный вывод на консоль</th></tr>
+    <tr>
+    <td class="wide-text"><span class="green_text">Коле</span> <span class="blue_text">Лене</span>  <span class="green_text">15</span> <span class="blue_text">21</span> <span class="green_text">лет</span> <br>
+	<span class="blue_text">год</span>
+    </td>
+    </tr>
+    </tbody></table>
+    <p>Или вот еще пример:</p>
+    <table class="table_example">
+    <tbody><tr><th width="50%">Код</th><th width="50%">Описание</th></tr>
+    <tr>
+    <td class="monospace_text wide-text"><b>class</b> MyClass <br>
+{<br>
+   &nbsp;<b>private</b> String <span class="green_text">name1</span> = "Оля";<br>
+   &nbsp;<b>private</b> String <span class="blue_text">name2</span> = "Лена";<br>
+    &nbsp;&nbsp;<b>public</b> void <span class="red_text">swap()</span><br>
+   &nbsp;&nbsp;{<br>
+       &nbsp;&nbsp;&nbsp;String s = name1;<br>
+       &nbsp;&nbsp;&nbsp;name1 = name2;<br>
+       &nbsp;&nbsp;&nbsp;name2 = s;<br>
+  &nbsp;}<br>
+}
+</td>
+                <td class="wide-text">Метод <span class="red_text">swap</span> меняет местами значения переменных <span class="green_text">name1</span> &amp; <span class="blue_text">name2</span>.<br><br>
+
+	Что же будет если его вызывать из двух нитей одновременно?
+</td>
+                
+            </tr>
+    
+    </tbody></table>
+    <table class="table_example">
+    <tbody><tr><th width="33%">Итоговый порядок</th><th width="33%">Код первой нити</th><th width="33%">Код второй нити</th></tr>
+    <tr>
+    <td class="wide-text"><span class="green_text">String s1 = name1;   //Оля<br>
+	name1 = name2;      //Лена</span><br>
+	<span class="blue_text">String s2 = name1;  //</span><span class="red_text">Лена(!)</span><br>
+	<span class="blue_text">name1 = name2;      //Лена</span><br>
+	<span class="green_text">name2 = s1;            //Оля</span><br>
+	<span class="blue_text">name2 = s2;            //Лена</span>
+    </td>
+    <td class="wide-text"><span class="green_text">String s1 = name1;<br>
+        name1 = name2;</span><br>
+	<span class="grey_text">исполняется другая нить<br>
+	исполняется другая нить</span><br>
+        <span class="green_text">name2 = s1;</span><br>
+	<span class="grey_text">исполняется другая нить</span>
+    </td>
+    <td class="wide-text"><span class="grey_text">исполняется другая нить<br>
+	исполняется другая нить</span><br>
+        <span class="blue_text">String s2 = name1;<br>
+        name1 = name2;</span><br>
+	<span class="grey_text">исполняется другая нить</span><br>
+        <span class="blue_text">name2 = s2;</span>           
+    </td>
+    </tr>
+    </tbody></table>
+    
+    <table class="table_example">
+    <tbody><tr><th width="33%">Итог</th></tr>
+    <tr>
+    <td class="wide-text"><span class="red_text">Обе переменных имеют значение «Лена».</span><br>
+	Объект «Оля» был перезатерт и потерян.
+    </td>
+    </tr>
+    </tbody></table>
+    <p class="amigo">- Кто бы мог подумать, что при элементарном присваивании возможны такие ошибки?</p>
+    <p>- Да, но для этой проблемы есть решение. Но об этом немного  позже – у меня горло пересохло.</p>
+    <div class="section_footer">
+        <button class="next_lesson" style="visibility: hidden;"></button>
+        <div class="line"></div>
+    </div>
+</section>
+
+    <section class="lesson">
+        <h2> Вы достигли нового уровня </h2>
+        <div style="width: 100%;height:450px;">
+            <div style="width:850px;height:478px;margin-left:-150px;margin-right: 150px;   background: url(images/profile/web-bender-17.gif) no-repeat;background-size: contain;">
+                <div style="width: 300px;height: 50px;display: inline-block; font-size: 30pt;text-align: left;margin-top: 200px;margin-left: 600px;">
+                    Уровень 17
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="line"></div>
+        <div class="section_footer">
+            <button class="next_lesson" style="visibility: hidden;"></button>
+            <!--<div class="line"></div>-->
+        </div>
+    </section>
+
+<div class="level-ref"><br>Доступные уровни:&nbsp;&nbsp;&nbsp;<a href="http://javarush.ru/levels/level00.html">0</a>&nbsp;&nbsp;<a href="http://javarush.ru/levels/level01.html">1</a>&nbsp;&nbsp;<a href="http://javarush.ru/levels/level02.html">2</a>&nbsp;&nbsp;<a href="http://javarush.ru/levels/level03.html">3</a>&nbsp;&nbsp;<a href="http://javarush.ru/levels/level04.html">4</a>&nbsp;&nbsp;<a href="http://javarush.ru/levels/level05.html">5</a>&nbsp;&nbsp;<a href="http://javarush.ru/levels/level06.html">6</a>&nbsp;&nbsp;<a href="http://javarush.ru/levels/level07.html">7</a>&nbsp;&nbsp;<a href="http://javarush.ru/levels/level08.html">8</a>&nbsp;&nbsp;<a href="http://javarush.ru/levels/level09.html">9</a>&nbsp;&nbsp;<a href="http://javarush.ru/levels/level10.html">10</a>&nbsp;&nbsp;<a href="http://javarush.ru/levels/level11.html">11</a>&nbsp;&nbsp;<a href="http://javarush.ru/levels/level12.html">12</a>&nbsp;&nbsp;<a href="http://javarush.ru/levels/level13.html">13</a>&nbsp;&nbsp;<a href="http://javarush.ru/levels/level14.html">14</a>&nbsp;&nbsp;<a href="http://javarush.ru/levels/level15.html">15</a>&nbsp;&nbsp;<a href="http://javarush.ru/levels/level16.html">16</a>&nbsp;&nbsp;<a href="http://javarush.ru/levels/level17.html">17</a>&nbsp;&nbsp;<a href="http://javarush.ru/levels/level18.html">18</a>&nbsp;&nbsp;<a href="http://javarush.ru/levels/level19.html">19</a>&nbsp;&nbsp;<br></div>
+
+<br>
+<br>
+
+</div>
+
+<!--WINDOWS BEGIN-->
+<div id="code-task-dialog" class="" tabindex="-1" role="dialog"><link rel="stylesheet" type="text/css" href="./edit-code.css">
+
+<div id="pCodeEditor" class="code-editor" style="display: none;">
+    <table style="width: 100%;height:100%;padding-bottom: 10px;" cellpadding="0" cellspacing="0">
+        <tbody><tr style="height: 40px">
+            <td rowspan="8" style="width:20px;"></td>
+            <td style="width: 40%;"></td>
+            <td style="width: 40%; font-size: 20pt;">Задание</td>
+            <td rowspan="2" style="width:auto; vertical-align: top;text-align: right;">
+                <button class="code-editor-close-button" onclick="taskeditor.hide();"></button>
+            </td>
+        </tr>
+        <tr style="height: 24px;font-size: 14pt;">
+            <td>Условие</td>
+            <td></td>
+            <!--<td></td>-->
+        </tr>
+        <tr style="height: 10%;">
+            <td colspan="2">
+                <textarea id="pCodeEditorTaskDescriptionArea" style="width: 100%;height: 60px;"></textarea>
+            </td>
+            <!--<td></td>-->
+            <td style="vertical-align: middle;text-align: center;">
+                <button class="code-editor-help-button" onclick="taskeditor.openHelpWindow();">help</button>
+            </td>
+        </tr>
+        <tr style="height: 30px;font-size: 14pt;"> <!--4-->
+            <td>Решение</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr style="height: 50%;"> <!--5-->
+            <td colspan="2">
+                <div id="pCodeEditor_JavaEditor" style="twidth:100%;theight: 100%;" class=" ace_editor ace-github"><textarea class="ace_text-input" wrap="off" autocorrect="off" autocapitalize="off" spellcheck="false" style="opacity: 0;"></textarea><div class="ace_gutter"><div class="ace_layer ace_gutter-layer ace_folding-enabled"></div><div class="ace_gutter-active-line"></div></div><div class="ace_scroller"><div class="ace_content"><div class="ace_layer ace_print-margin-layer"><div class="ace_print-margin" style="left: 4px; visibility: visible;"></div></div><div class="ace_layer ace_marker-layer"></div><div class="ace_layer ace_text-layer" style="padding: 0px 4px;"></div><div class="ace_layer ace_marker-layer"></div><div class="ace_layer ace_cursor-layer ace_hidden-cursors"><div class="ace_cursor"></div></div></div></div><div class="ace_scrollbar ace_scrollbar-v" style="display: none; width: 21px;"><div class="ace_scrollbar-inner" style="width: 21px;"></div></div><div class="ace_scrollbar ace_scrollbar-h" style="display: none; height: 21px;"><div class="ace_scrollbar-inner" style="height: 21px;"></div></div><div style="height: auto; width: auto; top: 0px; left: 0px; visibility: hidden; position: absolute; white-space: pre; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: inherit; overflow: hidden;"><div style="height: auto; width: auto; top: 0px; left: 0px; visibility: hidden; position: absolute; white-space: pre; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: inherit; overflow: visible;"></div><div style="height: auto; width: auto; top: 0px; left: 0px; visibility: hidden; position: absolute; white-space: pre; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: inherit; overflow: visible;">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</div></div></div>
+            </td>
+            <!--<td></td>-->
+            <td style="text-align: center;vertical-align: bottom;">
+                <button class="code-editor-run-button" onclick="taskeditor.runTaskAsync()"></button>
+            </td>
+        </tr>
+        <tr style="height: 30px;font-size: 14pt;"> <!--6-->
+            <td>Статус работы и вывод на экран:</td>
+            <td>Входные данные:</td>
+            <td></td>
+        </tr>
+        <tr style="height: 25%;"> <!--7-->
+            <td style="padding-right: 10px;">
+                <textarea style="width: 100%;height: 160px;margin: 0px;" id="pCodeEditorTaskOutputArea"></textarea>
+            </td>
+            <td style="">
+                <textarea style="width: 100%;height: 160px;margin: 0px;" id="pCodeEditorTaskInputArea" onclick="taskeditor.clearInputHelpMessage()">Если программа должна что-то прочитать с клавиатуры, то входные данные нужно указать тут (этот текст надо удалить).
+
+Данные стоит указывать по одному в каждой строке. </textarea>
+            </td>
+            <td style="text-align: center;vertical-align: middle;">
+                <button class="code-editor-fullscreen-button" onclick="taskeditor.fullscreen()"></button>
+            </td>
+        </tr>
+        <tr style="height: auto;"> <!--8-->
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+    </tbody></table>
+</div>
+
+<!--
+<div id="pCodeEditor" class="maximized code-editor" style="display: none;">
+
+    <div id="pCodeEditorCloseButtonPanel">
+        <button class="code-editor-close-button" onclick="taskeditor.hide();"></button>
+    </div>
+
+    <div id="pCodeEditorHelpButtonPanel">
+        <button class="code-editor-help-button" onclick="taskeditor.openHelpWindow();" >help</button>
+    </div>
+
+    <div id="pCodeEditorTitle">Задание</div>
+
+    <div id="pCodeEditorTaskDLabel">Условие:</div>
+    <div id="pCodeEditorTaskDescription">
+            <textarea id="pCodeEditorTaskDescriptionArea" >
+
+            </textarea>
+    </div>
+
+    <div id="pCodeEditorTaskSLabel">Решение:</div>
+    <div id="pCodeEditorTaskSolution">
+        <div id="pCodeEditor_JavaEditor" >
+
+        </div>
+    </div>
+
+    <div id="pCodeEditorTaskOLabel" >
+        <div style="width: 50%;height: 20px;float: left;display: inline-block;">Статус работы программы и вывод на экран: </div>
+        <div style="width: 50%;height: 20px;float: left;display: inline-block;">Входные данные:</div>
+    </div>
+    <div id="pCodeEditorTaskOutput">
+        <textarea style="display: inline-block; float: left;" id="pCodeEditorTaskOutputArea"></textarea>
+        <textarea style="display: inline-block;float: left;" id="pCodeEditorTaskInputArea" onclick="taskeditor.clearInputHelpMessage()">Если программа должна что-то прочитать с клавиатуры, то входные данные нужно указать тут (этот текст надо удалить).
+
+Данные стоит указывать по одному в каждой строке. </textarea>
+    </div>
+
+    <div id="pCodeEditorTaskRunButtonPanel">
+        <div style="width: 76px;height: 160px;display: block;margin-left: -10px;">
+        </div>
+        <div style="width: 65px;height: 65px;margin-left: 0px;margin-top: 10px;">
+            <button class="code-editor-run-button" onclick="taskeditor.runTaskAsync()"></button>
+        </div>
+    </div>
+    <div id="pCodeEditorTaskRunStatus">
+    </div>
+</div>-->
+</div>
+<div id="type-task-dialog" class="" tabindex="-1" role="dialog"><div id="pCopyEditor" class="code-editor" style="display: none;">
+    <div id="pCopyEditorCloseButtonPanel">
+        <button class="code-editor-close-button" onclick="copyeditor.hide();"></button>
+    </div>
+
+    <div id="pCopyEditorTitle">Тренировка ввода кода</div>
+
+    <div id="pCopyEditorOriginalLabel">Образец кода:</div>
+    <div id="pCopyEditorOriginalCode">
+        <div class="copy-editor-code-area ace_editor ace-github" id="pCopyEditorOriginalCode_JavaEditor"><textarea class="ace_text-input" wrap="off" autocorrect="off" autocapitalize="off" spellcheck="false" style="opacity: 0;"></textarea><div class="ace_gutter"><div class="ace_layer ace_gutter-layer ace_folding-enabled"></div><div class="ace_gutter-active-line"></div></div><div class="ace_scroller"><div class="ace_content"><div class="ace_layer ace_print-margin-layer"><div class="ace_print-margin" style="left: 4px; visibility: visible;"></div></div><div class="ace_layer ace_marker-layer"></div><div class="ace_layer ace_text-layer" style="padding: 0px 4px;"></div><div class="ace_layer ace_marker-layer"></div><div class="ace_layer ace_cursor-layer ace_hidden-cursors"><div class="ace_cursor"></div></div></div></div><div class="ace_scrollbar ace_scrollbar-v" style="display: none; width: 21px;"><div class="ace_scrollbar-inner" style="width: 21px;"></div></div><div class="ace_scrollbar ace_scrollbar-h" style="display: none; height: 21px;"><div class="ace_scrollbar-inner" style="height: 21px;"></div></div><div style="height: auto; width: auto; top: 0px; left: 0px; visibility: hidden; position: absolute; white-space: pre; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: inherit; overflow: hidden;"><div style="height: auto; width: auto; top: 0px; left: 0px; visibility: hidden; position: absolute; white-space: pre; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: inherit; overflow: visible;"></div><div style="height: auto; width: auto; top: 0px; left: 0px; visibility: hidden; position: absolute; white-space: pre; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: inherit; overflow: visible;">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</div></div></div>
+    </div>
+
+    <div id="pCopyEditorUserLabel">Ваш код (введите тот же код, что и в образце):</div>
+    <div id="pCopyEditorUserCode">
+        <div class="copy-editor-code-area ace_editor ace-github" id="pCopyEditorUserCode_JavaEditor"><textarea class="ace_text-input" wrap="off" autocorrect="off" autocapitalize="off" spellcheck="false" style="opacity: 0;"></textarea><div class="ace_gutter"><div class="ace_layer ace_gutter-layer ace_folding-enabled"></div><div class="ace_gutter-active-line"></div></div><div class="ace_scroller"><div class="ace_content"><div class="ace_layer ace_print-margin-layer"><div class="ace_print-margin" style="left: 4px; visibility: visible;"></div></div><div class="ace_layer ace_marker-layer"></div><div class="ace_layer ace_text-layer" style="padding: 0px 4px;"></div><div class="ace_layer ace_marker-layer"></div><div class="ace_layer ace_cursor-layer ace_hidden-cursors"><div class="ace_cursor"></div></div></div></div><div class="ace_scrollbar ace_scrollbar-v" style="display: none; width: 21px;"><div class="ace_scrollbar-inner" style="width: 21px;"></div></div><div class="ace_scrollbar ace_scrollbar-h" style="display: none; height: 21px;"><div class="ace_scrollbar-inner" style="height: 21px;"></div></div><div style="height: auto; width: auto; top: 0px; left: 0px; visibility: hidden; position: absolute; white-space: pre; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: inherit; overflow: hidden;"><div style="height: auto; width: auto; top: 0px; left: 0px; visibility: hidden; position: absolute; white-space: pre; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: inherit; overflow: visible;"></div><div style="height: auto; width: auto; top: 0px; left: 0px; visibility: hidden; position: absolute; white-space: pre; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: inherit; overflow: visible;">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</div></div></div>
+    </div>
+</div></div>
+<div id="top-panel-dialog" class="" tabindex="-1" role="dialog"><div id="pTopMessagePanel" class="top-message-panel" style="display: none;">
+
+    <!--info panel begin-->
+    <div id="idInfoPanel" class="info-message-panel" style="display: none;">
+        <div id="pInfoPicture" class="top-message-panel-picture">
+            <div class="top-message-panel-picture2">i</div>
+        </div>
+        <div id="pInfoMessage" class="top-message-panel-message">
+
+        </div>
+        <div id="pInfoButton" class="top-message-panel-button">
+            <button class="top-message-panel-button2" onclick="toppanel.hideInfoPanel();">X</button>
+        </div>
+    </div>
+    <!--info panel end-->
+
+    <!--money panel begin-->
+    <div id="idMoneyPanel" class="money-message-panel" style="display: none;">
+
+        <div id="pMoneyMessage" class="top-money-panel-message">
+            <div id="pMoneyGoldMessage" class="top-money-panel-gold-message" style="display: none;">
+                +3
+            </div>
+            <div id="pMoneySilverMessage" class="top-money-panel-silver-message" style="display: none;">
+                -5
+            </div>
+        </div>
+
+        <div id="pMoneyButton" class="top-message-panel-button">
+            <button class="top-message-panel-button2" onclick="toppanel.hideMoneyPanel();">X</button>
+        </div>
+    </div>
+    <!--money panel end-->
+
+</div></div>
+<div id="right-panel-dialog" class="" tabindex="-1" role="dialog"><div class="right-info-panel">
+    <div class="right-info-panel-container" context="">
+        <div class="right-info-panel-image">
+            <img src="./ship-mini.png" style="width: 49px;height: 16px;">
+        </div>
+        <div id="pMoneyGoldMessageX" class="right-info-panel-message">+45</div>
+    </div>
+    <div class="right-info-panel-container">
+        <div class="right-info-panel-image">
+            <img src="./dark-matter.png" style="width: 16px;height: 16px;">
+        </div>
+        <div id="pMoneySilverMessageX" class="right-info-panel-message">+3</div>
+    </div>
+    <div class="right-info-panel-container" style="display: none;">
+        <div class="right-info-panel-image">
+            <img src="./tasks-pressed.png" style="width: 16px;height: 16px;">
+        </div>
+        <div id="pUnsolvedTaskMessageX" class="right-info-panel-message">+0</div>
+    </div>
+    <div class="right-info-panel-container" style="display: none;">
+        <div class="right-info-panel-image">
+            <img src="./tasks-pressed.png" style="width: 16px;height: 16px;">
+        </div>
+        <div id="pUnreadedMailMessageX" class="right-info-panel-message">+0</div>
+    </div>
+</div></div>
+<div id="share-dialog" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"><!--<link rel="stylesheet" type="text/css" href="../js/bootstrap/bootstrap.css" />-->
+
+<script src="./bootstrap.js.Без названия"></script>
+
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h1 id="dialog-header" class="modal-title" style="text-align: center"></h1>
+            </div>
+            <div class="modal-body">
+                <img id="dialog-image" class="cartoon6">
+            </div>
+            <div class="modal-footer text-center">
+                <button type="button" class="btn btn-primary btn-lg center-block" style="text-align: center" onclick="share.postOnWall()">Поделиться с друзьями</button>
+            </div>
+        </div>
+    </div>
+
+<style>
+    .well {
+        min-height: 20px;
+        padding: 19px;
+        margin-bottom: 20px;
+        background-color: #f5f5f5;
+        border: 1px solid #e3e3e3;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+    }
+    .well blockquote {
+        border-color: #ddd;
+        border-color: rgba(0, 0, 0, .15);
+    }
+    .well-lg {
+        padding: 24px;
+        border-radius: 6px;
+    }
+    .well-sm {
+        padding: 9px;
+        border-radius: 3px;
+    }
+    .close {
+        float: right;
+        font-size: 21px;
+        font-weight: bold;
+        line-height: 1;
+        color: #000;
+        text-shadow: 0 1px 0 #fff;
+        filter: alpha(opacity=20);
+        opacity: .2;
+    }
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+        filter: alpha(opacity=50);
+        opacity: .5;
+    }
+    button.close {
+        -webkit-appearance: none;
+        padding: 0;
+        cursor: pointer;
+        background: transparent;
+        border: 0;
+    }
+    .modal-open {
+        overflow: hidden;
+    }
+    .modal {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1050;
+        display: none;
+        overflow: hidden;
+        -webkit-overflow-scrolling: touch;
+        outline: 0;
+    }
+    .modal.fade .modal-dialog {
+        -webkit-transition: -webkit-transform .3s ease-out;
+        -o-transition:      -o-transform .3s ease-out;
+        transition:         transform .3s ease-out;
+        -webkit-transform: translate3d(0, -25%, 0);
+        -o-transform: translate3d(0, -25%, 0);
+        transform: translate3d(0, -25%, 0);
+    }
+    .modal.in .modal-dialog {
+        -webkit-transform: translate3d(0, 0, 0);
+        -o-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+    .modal-open .modal {
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+    .modal-dialog {
+        position: relative;
+        width: auto;
+        margin: 10px;
+    }
+    .modal-content {
+        position: relative;
+        background-color: #fff;
+        -webkit-background-clip: padding-box;
+        background-clip: padding-box;
+        border: 1px solid #999;
+        border: 1px solid rgba(0, 0, 0, .2);
+        border-radius: 6px;
+        outline: 0;
+        -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, .5);
+        box-shadow: 0 3px 9px rgba(0, 0, 0, .5);
+    }
+    .modal-backdrop {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1040;
+        background-color: #000;
+    }
+    .modal-backdrop.fade {
+        filter: alpha(opacity=0);
+        opacity: 0;
+    }
+    .modal-backdrop.in {
+        filter: alpha(opacity=50);
+        opacity: .5;
+    }
+    .modal-header {
+        min-height: 16.42857143px;
+        padding: 15px;
+        border-bottom: 1px solid #e5e5e5;
+    }
+    .modal-header .close {
+        margin-top: -2px;
+    }
+    .modal-title {
+        margin: 0;
+        line-height: 1.42857143;
+    }
+    .modal-body {
+        position: relative;
+        padding: 15px;
+    }
+    .modal-footer {
+        padding: 15px;
+        text-align: right;
+        border-top: 1px solid #e5e5e5;
+    }
+    .modal-footer .btn + .btn {
+        margin-bottom: 0;
+        margin-left: 5px;
+    }
+    .modal-footer .btn-group .btn + .btn {
+        margin-left: -1px;
+    }
+    .modal-footer .btn-block + .btn-block {
+        margin-left: 0;
+    }
+    .modal-scrollbar-measure {
+        position: absolute;
+        top: -9999px;
+        width: 50px;
+        height: 50px;
+        overflow: scroll;
+    }
+    @media (min-width: 768px) {
+        .modal-dialog {
+            width: 600px;
+            margin: 30px auto;
+        }
+        .modal-content {
+            -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+        }
+        .modal-sm {
+            width: 300px;
+        }
+    }
+    @media (min-width: 992px) {
+        .modal-lg {
+            width: 900px;
+        }
+    }
+
+    .modal-footer:before,
+    .modal-footer:after {
+        display: table;
+        content: " ";
+    }
+
+    .text-center {
+        text-align: center;
+    }
+    .text-justify {
+        text-align: justify;
+    }
+
+
+    .btn {
+        display: inline-block;
+        padding: 6px 12px;
+        margin-bottom: 0;
+        font-size: 14px;
+        font-weight: normal;
+        line-height: 1.42857143;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        background-image: none;
+        border: 1px solid transparent;
+        border-radius: 4px;
+    }
+    .btn:focus,
+    .btn:active:focus,
+    .btn.active:focus {
+        outline: thin dotted;
+        outline: 5px auto -webkit-focus-ring-color;
+        outline-offset: -2px;
+    }
+    .btn:hover,
+    .btn:focus {
+        color: #333;
+        text-decoration: none;
+    }
+    .btn:active,
+    .btn.active {
+        background-image: none;
+        outline: 0;
+        -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+        box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+    }
+    .btn.disabled,
+    .btn[disabled],
+    fieldset[disabled] .btn {
+        pointer-events: none;
+        cursor: not-allowed;
+        filter: alpha(opacity=65);
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        opacity: .65;
+    }
+    .btn-default {
+        color: #333;
+        background-color: #fff;
+        border-color: #ccc;
+    }
+    .btn-default:hover,
+    .btn-default:focus,
+    .btn-default:active,
+    .btn-default.active,
+    .open > .dropdown-toggle.btn-default {
+        color: #333;
+        background-color: #e6e6e6;
+        border-color: #adadad;
+    }
+    .btn-default:active,
+    .btn-default.active,
+    .open > .dropdown-toggle.btn-default {
+        background-image: none;
+    }
+    .btn-default.disabled,
+    .btn-default[disabled],
+    fieldset[disabled] .btn-default,
+    .btn-default.disabled:hover,
+    .btn-default[disabled]:hover,
+    fieldset[disabled] .btn-default:hover,
+    .btn-default.disabled:focus,
+    .btn-default[disabled]:focus,
+    fieldset[disabled] .btn-default:focus,
+    .btn-default.disabled:active,
+    .btn-default[disabled]:active,
+    fieldset[disabled] .btn-default:active,
+    .btn-default.disabled.active,
+    .btn-default[disabled].active,
+    fieldset[disabled] .btn-default.active {
+        background-color: #fff;
+        border-color: #ccc;
+    }
+    .btn-default .badge {
+        color: #fff;
+        background-color: #333;
+    }
+    .btn-primary {
+        color: #fff;
+        background-color: #428bca;
+        border-color: #357ebd;
+    }
+    .btn-primary:hover,
+    .btn-primary:focus,
+    .btn-primary:active,
+    .btn-primary.active,
+    .open > .dropdown-toggle.btn-primary {
+        color: #fff;
+        background-color: #3071a9;
+        border-color: #285e8e;
+    }
+    .btn-primary:active,
+    .btn-primary.active,
+    .open > .dropdown-toggle.btn-primary {
+        background-image: none;
+    }
+    .btn-primary.disabled,
+    .btn-primary[disabled],
+    fieldset[disabled] .btn-primary,
+    .btn-primary.disabled:hover,
+    .btn-primary[disabled]:hover,
+    fieldset[disabled] .btn-primary:hover,
+    .btn-primary.disabled:focus,
+    .btn-primary[disabled]:focus,
+    fieldset[disabled] .btn-primary:focus,
+    .btn-primary.disabled:active,
+    .btn-primary[disabled]:active,
+    fieldset[disabled] .btn-primary:active,
+    .btn-primary.disabled.active,
+    .btn-primary[disabled].active,
+    fieldset[disabled] .btn-primary.active {
+        background-color: #428bca;
+        border-color: #357ebd;
+    }
+    .btn-primary .badge {
+        color: #428bca;
+        background-color: #fff;
+    }
+    .btn-success {
+        color: #fff;
+        background-color: #5cb85c;
+        border-color: #4cae4c;
+    }
+    .btn-success:hover,
+    .btn-success:focus,
+    .btn-success:active,
+    .btn-success.active,
+    .open > .dropdown-toggle.btn-success {
+        color: #fff;
+        background-color: #449d44;
+        border-color: #398439;
+    }
+    .btn-success:active,
+    .btn-success.active,
+    .open > .dropdown-toggle.btn-success {
+        background-image: none;
+    }
+    .btn-success.disabled,
+    .btn-success[disabled],
+    fieldset[disabled] .btn-success,
+    .btn-success.disabled:hover,
+    .btn-success[disabled]:hover,
+    fieldset[disabled] .btn-success:hover,
+    .btn-success.disabled:focus,
+    .btn-success[disabled]:focus,
+    fieldset[disabled] .btn-success:focus,
+    .btn-success.disabled:active,
+    .btn-success[disabled]:active,
+    fieldset[disabled] .btn-success:active,
+    .btn-success.disabled.active,
+    .btn-success[disabled].active,
+    fieldset[disabled] .btn-success.active {
+        background-color: #5cb85c;
+        border-color: #4cae4c;
+    }
+    .btn-success .badge {
+        color: #5cb85c;
+        background-color: #fff;
+    }
+    .btn-info {
+        color: #fff;
+        background-color: #5bc0de;
+        border-color: #46b8da;
+    }
+    .btn-info:hover,
+    .btn-info:focus,
+    .btn-info:active,
+    .btn-info.active,
+    .open > .dropdown-toggle.btn-info {
+        color: #fff;
+        background-color: #31b0d5;
+        border-color: #269abc;
+    }
+    .btn-info:active,
+    .btn-info.active,
+    .open > .dropdown-toggle.btn-info {
+        background-image: none;
+    }
+    .btn-info.disabled,
+    .btn-info[disabled],
+    fieldset[disabled] .btn-info,
+    .btn-info.disabled:hover,
+    .btn-info[disabled]:hover,
+    fieldset[disabled] .btn-info:hover,
+    .btn-info.disabled:focus,
+    .btn-info[disabled]:focus,
+    fieldset[disabled] .btn-info:focus,
+    .btn-info.disabled:active,
+    .btn-info[disabled]:active,
+    fieldset[disabled] .btn-info:active,
+    .btn-info.disabled.active,
+    .btn-info[disabled].active,
+    fieldset[disabled] .btn-info.active {
+        background-color: #5bc0de;
+        border-color: #46b8da;
+    }
+    .btn-info .badge {
+        color: #5bc0de;
+        background-color: #fff;
+    }
+    .btn-warning {
+        color: #fff;
+        background-color: #f0ad4e;
+        border-color: #eea236;
+    }
+    .btn-warning:hover,
+    .btn-warning:focus,
+    .btn-warning:active,
+    .btn-warning.active,
+    .open > .dropdown-toggle.btn-warning {
+        color: #fff;
+        background-color: #ec971f;
+        border-color: #d58512;
+    }
+    .btn-warning:active,
+    .btn-warning.active,
+    .open > .dropdown-toggle.btn-warning {
+        background-image: none;
+    }
+    .btn-warning.disabled,
+    .btn-warning[disabled],
+    fieldset[disabled] .btn-warning,
+    .btn-warning.disabled:hover,
+    .btn-warning[disabled]:hover,
+    fieldset[disabled] .btn-warning:hover,
+    .btn-warning.disabled:focus,
+    .btn-warning[disabled]:focus,
+    fieldset[disabled] .btn-warning:focus,
+    .btn-warning.disabled:active,
+    .btn-warning[disabled]:active,
+    fieldset[disabled] .btn-warning:active,
+    .btn-warning.disabled.active,
+    .btn-warning[disabled].active,
+    fieldset[disabled] .btn-warning.active {
+        background-color: #f0ad4e;
+        border-color: #eea236;
+    }
+    .btn-warning .badge {
+        color: #f0ad4e;
+        background-color: #fff;
+    }
+    .btn-danger {
+        color: #fff;
+        background-color: #d9534f;
+        border-color: #d43f3a;
+    }
+    .btn-danger:hover,
+    .btn-danger:focus,
+    .btn-danger:active,
+    .btn-danger.active,
+    .open > .dropdown-toggle.btn-danger {
+        color: #fff;
+        background-color: #c9302c;
+        border-color: #ac2925;
+    }
+    .btn-danger:active,
+    .btn-danger.active,
+    .open > .dropdown-toggle.btn-danger {
+        background-image: none;
+    }
+    .btn-danger.disabled,
+    .btn-danger[disabled],
+    fieldset[disabled] .btn-danger,
+    .btn-danger.disabled:hover,
+    .btn-danger[disabled]:hover,
+    fieldset[disabled] .btn-danger:hover,
+    .btn-danger.disabled:focus,
+    .btn-danger[disabled]:focus,
+    fieldset[disabled] .btn-danger:focus,
+    .btn-danger.disabled:active,
+    .btn-danger[disabled]:active,
+    fieldset[disabled] .btn-danger:active,
+    .btn-danger.disabled.active,
+    .btn-danger[disabled].active,
+    fieldset[disabled] .btn-danger.active {
+        background-color: #d9534f;
+        border-color: #d43f3a;
+    }
+    .btn-danger .badge {
+        color: #d9534f;
+        background-color: #fff;
+    }
+
+    .btn-lg,
+    .btn-group-lg > .btn {
+        padding: 10px 16px;
+        font-size: 18px;
+        line-height: 1.33;
+        border-radius: 6px;
+    }
+
+    .center-block {
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+    }
+</style></div>
+<div id="social-dialog" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"><!--<link rel="stylesheet" type="text/css" href="../js/bootstrap/bootstrap.css" />-->
+
+<script src="./bootstrap.js.Без названия"></script>
+
+    <div class="social-modal-dialog social-modal-lg">
+        <div class="social-modal-content">
+            <div class="social-modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h1 id="dialog-header" class="social-modal-title" style="text-align: center">Привяжите социальную сеть к вашему аккаунту:</h1>
+            </div>
+            <div class="social-modal-body">
+                <form action="http://javarush.ru/user/attach/twitter" method="POST" target="_top">
+                        <button type="submit" class="btn btn-primary btn-lg center-block" style="text-align: center;width: 340px;vertical-align: middle;">
+                            <img src="./twitter-30.png">
+                            Привязать Twitter
+                        </button>
+                </form>
+
+                <div style="height: 5px;width: 150px;display: block"></div>
+
+                <form action="http://javarush.ru/user/attach/facebook" method="POST" target="_top">
+                        <button type="submit" class="btn btn-primary btn-lg center-block" style="text-align: center;width: 340px;">
+                            <img src="./facebook-30.png">
+                            Привязать Facebook
+                        </button>
+                </form>
+
+                <div style="height: 5px;width: 150px;display: block"></div>
+
+                <form action="http://javarush.ru/user/attach/vkontakte" method="POST" target="_top">
+                        <button type="submit" class="btn btn-primary btn-lg center-block" style="text-align: center;width: 340px;">
+                            <img src="./vkontakte-30.png">
+                            Привязать VKontakte
+                        </button>
+                </form>
+            </div>
+
+            <div class="social-modal-footer text-center">
+                У вас полностью анонимный аккаунт. Пожалуйста, привяжите социальную сеть, чтобы случайно не потерять к нему доступ.
+                <!--<button type="button" class="btn btn-primary btn-lg center-block" style="text-align: center" onclick="share.postOnWall()">Поделиться с друзьями</button>-->
+            </div>
+        </div>
+    </div>
+
+<style>
+    .well {
+        min-height: 20px;
+        padding: 19px;
+        margin-bottom: 20px;
+        background-color: #f5f5f5;
+        border: 1px solid #e3e3e3;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+    }
+    .well blockquote {
+        border-color: #ddd;
+        border-color: rgba(0, 0, 0, .15);
+    }
+    .well-lg {
+        padding: 24px;
+        border-radius: 6px;
+    }
+    .well-sm {
+        padding: 9px;
+        border-radius: 3px;
+    }
+    .close {
+        float: right;
+        font-size: 21px;
+        font-weight: bold;
+        line-height: 1;
+        color: #000;
+        text-shadow: 0 1px 0 #fff;
+        filter: alpha(opacity=20);
+        opacity: .2;
+    }
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+        filter: alpha(opacity=50);
+        opacity: .5;
+    }
+    button.close {
+        -webkit-appearance: none;
+        padding: 0;
+        cursor: pointer;
+        background: transparent;
+        border: 0;
+    }
+    .social-modal-open {
+        overflow: hidden;
+    }
+    .modal {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1050;
+        display: none;
+        overflow: hidden;
+        -webkit-overflow-scrolling: touch;
+        outline: 0;
+    }
+    .modal.fade .social-modal-dialog {
+        -webkit-transition: -webkit-transform .3s ease-out;
+        -o-transition:      -o-transform .3s ease-out;
+        transition:         transform .3s ease-out;
+        -webkit-transform: translate3d(0, -25%, 0);
+        -o-transform: translate3d(0, -25%, 0);
+        transform: translate3d(0, -25%, 0);
+    }
+    .modal.in .social-modal-dialog {
+        -webkit-transform: translate3d(0, 0, 0);
+        -o-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+    .social-modal-open .modal {
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+    .social-modal-dialog {
+        position: relative;
+        width: auto;
+        margin: 10px;
+    }
+    .social-modal-content {
+        position: relative;
+        background-color: #fff;
+        -webkit-background-clip: padding-box;
+        background-clip: padding-box;
+        border: 1px solid #999;
+        border: 1px solid rgba(0, 0, 0, .2);
+        border-radius: 6px;
+        outline: 0;
+        -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, .5);
+        box-shadow: 0 3px 9px rgba(0, 0, 0, .5);
+    }
+    .social-modal-backdrop {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1040;
+        background-color: #000;
+    }
+    .social-modal-backdrop.fade {
+        filter: alpha(opacity=0);
+        opacity: 0;
+    }
+    .social-modal-backdrop.in {
+        filter: alpha(opacity=50);
+        opacity: .5;
+    }
+    .social-modal-header {
+        min-height: 16.42857143px;
+        padding: 15px;
+        border-bottom: 1px solid #e5e5e5;
+    }
+    .social-modal-header .close {
+        margin-top: -2px;
+    }
+    .social-modal-title {
+        margin: 0;
+        line-height: 1.42857143;
+    }
+    .social-modal-body {
+        position: relative;
+        padding: 15px;
+    }
+    .social-modal-footer {
+        padding: 15px;
+        text-align: right;
+        border-top: 1px solid #e5e5e5;
+    }
+    .social-modal-footer .btn + .btn {
+        margin-bottom: 0;
+        margin-left: 5px;
+    }
+    .social-modal-footer .btn-group .btn + .btn {
+        margin-left: -1px;
+    }
+    .social-modal-footer .btn-block + .btn-block {
+        margin-left: 0;
+    }
+    .social-modal-scrollbar-measure {
+        position: absolute;
+        top: -9999px;
+        width: 50px;
+        height: 50px;
+        overflow: scroll;
+    }
+    @media (min-width: 768px) {
+        .social-modal-dialog {
+            width: 600px;
+            margin: 30px auto;
+        }
+        .social-modal-content {
+            -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+        }
+        .social-modal-sm {
+            width: 300px;
+        }
+    }
+    @media (min-width: 692px) {
+        .social-modal-lg {
+            width: 600px;
+        }
+    }
+
+    .social-modal-footer:before,
+    .social-modal-footer:after {
+        display: table;
+        content: " ";
+    }
+
+    .text-center {
+        text-align: center;
+    }
+    .text-justify {
+        text-align: justify;
+    }
+
+
+    .btn {
+        display: inline-block;
+        padding: 6px 12px;
+        margin-bottom: 0;
+        font-size: 14px;
+        font-weight: normal;
+        line-height: 1.42857143;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        background-image: none;
+        border: 1px solid transparent;
+        border-radius: 4px;
+    }
+    .btn:focus,
+    .btn:active:focus,
+    .btn.active:focus {
+        outline: thin dotted;
+        outline: 5px auto -webkit-focus-ring-color;
+        outline-offset: -2px;
+    }
+    .btn:hover,
+    .btn:focus {
+        color: #333;
+        text-decoration: none;
+    }
+    .btn:active,
+    .btn.active {
+        background-image: none;
+        outline: 0;
+        -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+        box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+    }
+    .btn.disabled,
+    .btn[disabled],
+    fieldset[disabled] .btn {
+        pointer-events: none;
+        cursor: not-allowed;
+        filter: alpha(opacity=65);
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        opacity: .65;
+    }
+    .btn-default {
+        color: #333;
+        background-color: #fff;
+        border-color: #ccc;
+    }
+    .btn-default:hover,
+    .btn-default:focus,
+    .btn-default:active,
+    .btn-default.active,
+    .open > .dropdown-toggle.btn-default {
+        color: #333;
+        background-color: #e6e6e6;
+        border-color: #adadad;
+    }
+    .btn-default:active,
+    .btn-default.active,
+    .open > .dropdown-toggle.btn-default {
+        background-image: none;
+    }
+    .btn-default.disabled,
+    .btn-default[disabled],
+    fieldset[disabled] .btn-default,
+    .btn-default.disabled:hover,
+    .btn-default[disabled]:hover,
+    fieldset[disabled] .btn-default:hover,
+    .btn-default.disabled:focus,
+    .btn-default[disabled]:focus,
+    fieldset[disabled] .btn-default:focus,
+    .btn-default.disabled:active,
+    .btn-default[disabled]:active,
+    fieldset[disabled] .btn-default:active,
+    .btn-default.disabled.active,
+    .btn-default[disabled].active,
+    fieldset[disabled] .btn-default.active {
+        background-color: #fff;
+        border-color: #ccc;
+    }
+    .btn-default .badge {
+        color: #fff;
+        background-color: #333;
+    }
+    .btn-primary {
+        color: #fff;
+        background-color: #428bca;
+        border-color: #357ebd;
+    }
+    .btn-primary:hover,
+    .btn-primary:focus,
+    .btn-primary:active,
+    .btn-primary.active,
+    .open > .dropdown-toggle.btn-primary {
+        color: #fff;
+        background-color: #3071a9;
+        border-color: #285e8e;
+    }
+    .btn-primary:active,
+    .btn-primary.active,
+    .open > .dropdown-toggle.btn-primary {
+        background-image: none;
+    }
+    .btn-primary.disabled,
+    .btn-primary[disabled],
+    fieldset[disabled] .btn-primary,
+    .btn-primary.disabled:hover,
+    .btn-primary[disabled]:hover,
+    fieldset[disabled] .btn-primary:hover,
+    .btn-primary.disabled:focus,
+    .btn-primary[disabled]:focus,
+    fieldset[disabled] .btn-primary:focus,
+    .btn-primary.disabled:active,
+    .btn-primary[disabled]:active,
+    fieldset[disabled] .btn-primary:active,
+    .btn-primary.disabled.active,
+    .btn-primary[disabled].active,
+    fieldset[disabled] .btn-primary.active {
+        background-color: #428bca;
+        border-color: #357ebd;
+    }
+    .btn-primary .badge {
+        color: #428bca;
+        background-color: #fff;
+    }
+    .btn-success {
+        color: #fff;
+        background-color: #5cb85c;
+        border-color: #4cae4c;
+    }
+    .btn-success:hover,
+    .btn-success:focus,
+    .btn-success:active,
+    .btn-success.active,
+    .open > .dropdown-toggle.btn-success {
+        color: #fff;
+        background-color: #449d44;
+        border-color: #398439;
+    }
+    .btn-success:active,
+    .btn-success.active,
+    .open > .dropdown-toggle.btn-success {
+        background-image: none;
+    }
+    .btn-success.disabled,
+    .btn-success[disabled],
+    fieldset[disabled] .btn-success,
+    .btn-success.disabled:hover,
+    .btn-success[disabled]:hover,
+    fieldset[disabled] .btn-success:hover,
+    .btn-success.disabled:focus,
+    .btn-success[disabled]:focus,
+    fieldset[disabled] .btn-success:focus,
+    .btn-success.disabled:active,
+    .btn-success[disabled]:active,
+    fieldset[disabled] .btn-success:active,
+    .btn-success.disabled.active,
+    .btn-success[disabled].active,
+    fieldset[disabled] .btn-success.active {
+        background-color: #5cb85c;
+        border-color: #4cae4c;
+    }
+    .btn-success .badge {
+        color: #5cb85c;
+        background-color: #fff;
+    }
+    .btn-info {
+        color: #fff;
+        background-color: #5bc0de;
+        border-color: #46b8da;
+    }
+    .btn-info:hover,
+    .btn-info:focus,
+    .btn-info:active,
+    .btn-info.active,
+    .open > .dropdown-toggle.btn-info {
+        color: #fff;
+        background-color: #31b0d5;
+        border-color: #269abc;
+    }
+    .btn-info:active,
+    .btn-info.active,
+    .open > .dropdown-toggle.btn-info {
+        background-image: none;
+    }
+    .btn-info.disabled,
+    .btn-info[disabled],
+    fieldset[disabled] .btn-info,
+    .btn-info.disabled:hover,
+    .btn-info[disabled]:hover,
+    fieldset[disabled] .btn-info:hover,
+    .btn-info.disabled:focus,
+    .btn-info[disabled]:focus,
+    fieldset[disabled] .btn-info:focus,
+    .btn-info.disabled:active,
+    .btn-info[disabled]:active,
+    fieldset[disabled] .btn-info:active,
+    .btn-info.disabled.active,
+    .btn-info[disabled].active,
+    fieldset[disabled] .btn-info.active {
+        background-color: #5bc0de;
+        border-color: #46b8da;
+    }
+    .btn-info .badge {
+        color: #5bc0de;
+        background-color: #fff;
+    }
+    .btn-warning {
+        color: #fff;
+        background-color: #f0ad4e;
+        border-color: #eea236;
+    }
+    .btn-warning:hover,
+    .btn-warning:focus,
+    .btn-warning:active,
+    .btn-warning.active,
+    .open > .dropdown-toggle.btn-warning {
+        color: #fff;
+        background-color: #ec971f;
+        border-color: #d58512;
+    }
+    .btn-warning:active,
+    .btn-warning.active,
+    .open > .dropdown-toggle.btn-warning {
+        background-image: none;
+    }
+    .btn-warning.disabled,
+    .btn-warning[disabled],
+    fieldset[disabled] .btn-warning,
+    .btn-warning.disabled:hover,
+    .btn-warning[disabled]:hover,
+    fieldset[disabled] .btn-warning:hover,
+    .btn-warning.disabled:focus,
+    .btn-warning[disabled]:focus,
+    fieldset[disabled] .btn-warning:focus,
+    .btn-warning.disabled:active,
+    .btn-warning[disabled]:active,
+    fieldset[disabled] .btn-warning:active,
+    .btn-warning.disabled.active,
+    .btn-warning[disabled].active,
+    fieldset[disabled] .btn-warning.active {
+        background-color: #f0ad4e;
+        border-color: #eea236;
+    }
+    .btn-warning .badge {
+        color: #f0ad4e;
+        background-color: #fff;
+    }
+    .btn-danger {
+        color: #fff;
+        background-color: #d9534f;
+        border-color: #d43f3a;
+    }
+    .btn-danger:hover,
+    .btn-danger:focus,
+    .btn-danger:active,
+    .btn-danger.active,
+    .open > .dropdown-toggle.btn-danger {
+        color: #fff;
+        background-color: #c9302c;
+        border-color: #ac2925;
+    }
+    .btn-danger:active,
+    .btn-danger.active,
+    .open > .dropdown-toggle.btn-danger {
+        background-image: none;
+    }
+    .btn-danger.disabled,
+    .btn-danger[disabled],
+    fieldset[disabled] .btn-danger,
+    .btn-danger.disabled:hover,
+    .btn-danger[disabled]:hover,
+    fieldset[disabled] .btn-danger:hover,
+    .btn-danger.disabled:focus,
+    .btn-danger[disabled]:focus,
+    fieldset[disabled] .btn-danger:focus,
+    .btn-danger.disabled:active,
+    .btn-danger[disabled]:active,
+    fieldset[disabled] .btn-danger:active,
+    .btn-danger.disabled.active,
+    .btn-danger[disabled].active,
+    fieldset[disabled] .btn-danger.active {
+        background-color: #d9534f;
+        border-color: #d43f3a;
+    }
+    .btn-danger .badge {
+        color: #d9534f;
+        background-color: #fff;
+    }
+
+    .btn-lg,
+    .btn-group-lg > .btn {
+        padding: 10px 16px;
+        font-size: 18px;
+        line-height: 1.33;
+        border-radius: 6px;
+    }
+
+    .center-block {
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+    }
+</style></div>
+<!--WINDOWS END-->
+
+<script language="JavaScript">
+    /*MAIN*/
+    $(function(){
+        TOPMENU.initialize();
+        controller.main(17);
+    })
+</script>
+
+
+<!-- Yandex.Metrika counter --><script>(function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter23548852 = new Ya.Metrika({id:23548852, webvisor:true, clickmap:true, trackLinks:true, accurateTrackBounce:true, trackHash:true}); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks");</script><noscript>&lt;div&gt;&lt;img src="//mc.yandex.ru/watch/23548852" style="position:absolute; left:-9999px;" alt="" /&gt;&lt;/div&gt;</noscript><!-- /Yandex.Metrika counter -->
+
+<!--VK remarketing--> <script type="text/javascript">(window.Image ? (new Image()) : document.createElement('img')).src = location.protocol + '//vk.com/rtrg?r=suzK*cTK8ENwibxo6kXHqPUOEoZ0q/qCpLFBU09ssARGoOvJVT0hTTUCenGO9J3swAVqz1dpjqdHQqUXTVSdCMitczHB*e2vsBR*ol36lRwj1ZLvi9vazhjAbXwDlc*xC/J18ZypuIPYpzjXFkjXfY5TXY*xpxwzbpcBUDiGct8-';</script>
+
+
+
+</body></html>
